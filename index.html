@@ -1,295 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PocketPans • Fillable Silicone Bakeware</title>
-  <style>
-    :root {
-      --primary: #e67e22;
-      --red: #ef4750;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #333;
-    }
-    header {
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
-      padding: 1.5rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid #eee;
-    }
-    .logo { 
-      font-size: 2.1rem; 
-      font-weight: 700; 
-      color: var(--primary); 
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PocketPans — Fillable Bakeware for Cupcakes & Personal Pizzas</title>
+<meta name="description" content="Premium silicone bakeware with a unique fillable insert system. Make cream-filled cupcakes, deep dish pizzas, hand pies, and more.">
 
-    /* HERO SLIDER */
-    .hero {
-      position: relative;
-      height: 85vh;
-      min-height: 620px;
-      overflow: hidden;
-    }
-    .hero-image {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    .slider-container {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      cursor: ew-resize; z-index: 10;
-    }
-    .slider-divider {
-      position: absolute; top: 0; left: 50%;
-      width: 6px; height: 100%;
-      background: white;
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      z-index: 11;
-    }
-    .slider-handle {
-      position: absolute; top: 50%; left: -31px;
-      width: 64px; height: 64px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.1rem;
-      color: #444;
-      z-index: 12;
-      transition: all 0.2s;
-    }
-    .slider-handle:hover { transform: scale(1.12); color: var(--primary); }
+<style>
+:root {
+  --cream: #faf5ee;
+  --cream-deep: #f1e9d8;
+  --terracotta: #c2553e;
+  --terracotta-deep: #8e3a28;
+  --red: #d33a3a;
+  --ink: #1a1410;
+  --ink-soft: #4a3f36;
+  --warm-gray: #8a7a6c;
+  --line: #d9cdb8;
+  --slider-duration: 1.2s;
+  --fade-duration: 0.55s;
+}
 
-    /* CONTENT */
-    .content { background: white; }
-    .section { 
-      display: none; 
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-    .section.active { 
-      display: block; 
-      opacity: 1; 
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
 
-    /* Brand - Professional Multi-Section */
-    .brand-section { background: #fffaf5; }
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250, 245, 238, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1400px; margin: 0 auto;
+  padding: 1.1rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  cursor: pointer; background: none; border: none;
+  display: flex; align-items: baseline; gap: 0.3rem;
+}
+.logo .accent { color: var(--terracotta); font-style: italic; }
+.nav-meta {
+  font-size: 0.75rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--warm-gray);
+  font-weight: 500;
+}
 
-    .brand-hero {
-      padding: 6rem 5% 4rem;
-      text-align: center;
-      background: #fffaf5;
-    }
-    .brand-feature {
-      padding: 5rem 5%;
-      color: #222;
-    }
-    .brand-feature.light { background: #fffaf5; }
-    .brand-feature.warm { background: #fff4eb; }
-    .brand-feature.neutral { background: #f8f8f8; }
+/* HERO */
+.hero {
+  position: relative;
+  height: 78vh;
+  min-height: 540px;
+  max-height: 780px;
+  overflow: hidden;
+  background: var(--ink);
+}
 
-    h1 { font-size: 3.2rem; line-height: 1.1; margin-bottom: 1.2rem; }
-    h2 { font-size: 2.1rem; margin-bottom: 1.6rem; }
+/*
+  Both image layers are absolutely positioned and FIXED IN PLACE.
+  The divider determines a clip-path on each layer to reveal/hide.
+  Cupcake image is anchored to the LEFT HALF center.
+  Pizza image is anchored to the RIGHT HALF center.
+  Neither image moves or scales when the divider changes.
+*/
+.image-layer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+.image-layer .img-wrap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-layer .img-wrap > img,
+.image-layer .img-wrap > .placeholder-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
 
-    .brand-feature p {
-      font-size: 1.35rem;
-      max-width: 780px;
-      margin: 0 auto;
-    }
+#cupcake-layer {
+  left: 0;
+  z-index: 2;
+  /* clip-path will be controlled via inline style; starts showing full 50% */
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0s; /* set by JS when animating */
+}
+#cupcake-layer .img-wrap {
+  left: 0;
+  width: 100%;
+}
 
-    /* Full Bleed Product States */
-    .product-full {
-      position: relative;
-      height: 100vh;
-      min-height: 680px;
-      color: white;
-    }
-    .product-full img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(0.72);
-    }
-    .overlay {
-      position: relative;
-      z-index: 2;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18% 5% 0;
-      text-align: left;
-    }
-    .overlay h1 {
-      font-size: 3.6rem;
-      line-height: 1.05;
-      margin-bottom: 0.8rem;
-    }
-    .overlay h2 {
-      font-size: 1.95rem;
-      margin-bottom: 1.8rem;
-    }
-    .overlay p {
-      font-size: 1.35rem;
-      max-width: 620px;
-      margin-bottom: 2.8rem;
-    }
+#pizza-layer {
+  left: 50%;
+  z-index: 1;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0s;
+}
+#pizza-layer .img-wrap {
+  left: 0;
+  width: 100%;
+}
 
-    .cta-button {
-      background: white;
-      color: #222;
-      padding: 18px 46px;
-      font-size: 1.25rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-    }
-  </style>
+/*
+  When divider moves to reveal the cupcake further (slider goes right past 50%),
+  the cupcake layer's width must extend past 50% into the right half.
+  We handle this by always rendering both layers at 100vw width and using
+  clip-path inset() to mask them based on divider position.
+*/
+.image-layer.full-width {
+  width: 100%;
+  left: 0;
+}
+.image-layer.full-width .img-wrap {
+  /* Inner image position depends on which layer */
+}
+#cupcake-layer.full-width .img-wrap {
+  left: 0;
+  width: 50%; /* cupcake stays anchored to its left-half position */
+}
+#pizza-layer.full-width .img-wrap {
+  left: 50%;
+  width: 50%; /* pizza stays anchored to its right-half position */
+}
+
+.image-layer.animating {
+  transition: clip-path var(--slider-duration) cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* Hero labels */
+.hero-label {
+  position: absolute;
+  bottom: 4rem;
+  z-index: 5;
+  color: var(--cream);
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.hero-label .name {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2.2rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  margin-top: 0.4rem;
+  opacity: 0.95;
+}
+.hero-label.left { left: 6%; }
+.hero-label.right { right: 6%; text-align: right; }
+@media (max-width: 768px) {
+  .hero-label { bottom: 7rem; font-size: 0.7rem; }
+  .hero-label .name { font-size: 1.4rem; }
+}
+
+/* Divider */
+.divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: var(--cream);
+  box-shadow: 0 0 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.15);
+  z-index: 11;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.divider.animating {
+  transition: left var(--slider-duration) cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* Desktop handle */
+.handle-desktop {
+  position: absolute;
+  top: 50%;
+  left: -36px;
+  width: 72px; height: 72px;
+  background: var(--cream);
+  border-radius: 50%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.04);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 12;
+  gap: 6px;
+}
+.handle-desktop .arrow {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: var(--terracotta-deep);
+  opacity: 0.85;
+}
+@media (max-width: 768px) {
+  .handle-desktop { display: none; }
+}
+
+/* Slider drag area */
+.slider-area {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+/* Mobile pill controls */
+.pill-controls {
+  display: none;
+  position: absolute;
+  bottom: 1.8rem;
+  left: 0; right: 0;
+  z-index: 15;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  pointer-events: none;
+}
+.pill {
+  pointer-events: auto;
+  cursor: pointer;
+  background: var(--cream);
+  color: var(--ink);
+  border: none;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease, background 0.3s, color 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pill-side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 56px;
+  width: 180px;
+  border-radius: 999px;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.pill-side.left { left: -110px; justify-content: flex-end; padding-right: 1.4rem; }
+.pill-side.right { right: -110px; justify-content: flex-start; padding-left: 1.4rem; }
+.pill-side.left.active { transform: translateY(-50%) translateX(40px); background: var(--terracotta); color: var(--cream); }
+.pill-side.right.active { transform: translateY(-50%) translateX(-40px); background: var(--terracotta); color: var(--cream); }
+
+.pill-center {
+  position: relative; z-index: 2;
+  width: 78px; height: 78px;
+  border-radius: 50%;
+  background: var(--cream);
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 2rem; font-style: italic;
+  color: var(--terracotta);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 0 4px var(--terracotta);
+  letter-spacing: -0.02em;
+  padding-bottom: 4px;
+}
+.pill-center.active { background: var(--terracotta); color: var(--cream); }
+@media (max-width: 768px) {
+  .pill-controls { display: flex; }
+}
+
+/* Sections */
+.content-wrap { position: relative; }
+.section {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  visibility: hidden;
+}
+.section.active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+  visibility: visible;
+  transition: opacity var(--fade-duration) ease;
+}
+
+/* Brand content */
+.brand-intro {
+  padding: 6rem 5% 4rem;
+  text-align: center;
+  background: var(--cream);
+}
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 1.4rem;
+}
+.brand-intro h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  font-weight: 400; line-height: 1.05; letter-spacing: -0.025em;
+  max-width: 900px; margin: 0 auto 1.6rem;
+  color: var(--ink);
+}
+.brand-intro h1 em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+.brand-intro .lead {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.5;
+  max-width: 640px; margin: 0 auto;
+  color: var(--ink-soft);
+}
+
+.concept { background: var(--cream-deep); padding: 7rem 5%; }
+.concept-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+@media (max-width: 768px) { .concept-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+.concept-visual {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, #d9c5a0, #b89368);
+  border-radius: 8px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.3);
+}
+.concept-visual img { width: 100%; height: 100%; object-fit: cover; }
+.concept-text .eyebrow { color: var(--terracotta-deep); }
+.concept-text h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400; line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.concept-text h2 em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+.concept-text p { font-size: 1.05rem; margin-bottom: 1rem; color: var(--ink-soft); }
+.concept-text p:last-child { margin-bottom: 0; }
+
+.capabilities { background: var(--cream); padding: 7rem 5%; }
+.capabilities-inner { max-width: 1200px; margin: 0 auto; }
+.capabilities-header { text-align: center; margin-bottom: 4rem; }
+.capabilities-header h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400; letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.capabilities-header h2 em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+
+.capabilities-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+@media (max-width: 900px) { .capabilities-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .capabilities-grid { grid-template-columns: 1fr; } }
+.cap-card {
+  background: var(--cream-deep);
+  padding: 2.5rem 2rem;
+  border-radius: 4px;
+  border-top: 3px solid var(--terracotta);
+}
+.cap-card .num {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+  font-size: 2.4rem; color: var(--terracotta);
+  display: block; margin-bottom: 0.6rem; line-height: 1;
+}
+.cap-card h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 1.3rem; margin-bottom: 0.7rem; letter-spacing: -0.01em;
+}
+.cap-card p { font-size: 0.95rem; color: var(--ink-soft); }
+
+.quality-strip {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 4rem 5%;
+}
+.quality-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+}
+@media (max-width: 768px) { .quality-inner { grid-template-columns: repeat(2, 1fr); } }
+.quality-item { text-align: center; }
+.quality-item .label {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+  font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  opacity: 0.7; margin-bottom: 0.4rem;
+}
+.quality-item .value {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 1.6rem; letter-spacing: -0.01em;
+}
+
+.variant-anchors { background: var(--cream-deep); padding: 7rem 5%; }
+.variant-anchors-inner { max-width: 1200px; margin: 0 auto; }
+.variant-anchors-header { text-align: center; margin-bottom: 4rem; }
+.variant-anchors-header h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400; letter-spacing: -0.02em;
+}
+.variant-anchors-header h2 em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+
+.anchor-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 768px) { .anchor-row { grid-template-columns: 1fr; } }
+.anchor-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 3rem 2.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.anchor-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(194,85,62,0.06) 100%);
+  opacity: 0; transition: opacity 0.4s;
+  pointer-events: none;
+}
+.anchor-card:hover {
+  border-color: var(--terracotta);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -20px rgba(0,0,0,0.18);
+}
+.anchor-card:hover::after { opacity: 1; }
+.anchor-card .visual {
+  aspect-ratio: 16/10;
+  background: var(--cream-deep);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.anchor-card .visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.anchor-card:hover .visual img { transform: scale(1.04); }
+.anchor-card .eyebrow { margin-bottom: 0.5rem; }
+.anchor-card h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400; font-style: italic;
+  font-size: 2.2rem; letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+}
+.anchor-card .desc {
+  color: var(--ink-soft);
+  margin-bottom: 1.4rem;
+  font-size: 1rem;
+}
+.anchor-card .arrow-link {
+  font-family: 'Fraunces', serif;
+  font-style: italic; font-weight: 500;
+  color: var(--terracotta);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 1.05rem;
+}
+.anchor-card .arrow-link::after { content: '→'; transition: transform 0.3s; }
+.anchor-card:hover .arrow-link::after { transform: translateX(6px); }
+
+/* Product view */
+.product-view { background: var(--cream); min-height: 60vh; }
+.product-hero { padding: 5rem 5% 3rem; text-align: center; background: var(--cream); }
+.product-hero .eyebrow { font-size: 0.7rem; }
+.product-hero h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 400; font-style: italic;
+  line-height: 1; letter-spacing: -0.025em;
+  margin: 0.8rem 0 1.4rem;
+}
+.product-hero .tagline {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 640px; margin: 0 auto 2rem;
+}
+.product-hero .price-line {
+  display: inline-flex; align-items: baseline; gap: 0.6rem;
+  padding-bottom: 0.3rem; border-bottom: 1px solid var(--line);
+  margin-bottom: 2.5rem;
+}
+.product-hero .price {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 1.8rem; color: var(--ink);
+}
+.product-hero .price-note {
+  font-size: 0.75rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--warm-gray);
+}
+.buy-cta {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  background: var(--terracotta); color: var(--cream);
+  padding: 1.1rem 2.6rem;
+  border: none; border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; font-size: 1rem; letter-spacing: 0.04em;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.buy-cta:hover { background: var(--terracotta-deep); transform: translateY(-2px); }
+.buy-cta::after { content: '→'; }
+
+.product-visual { padding: 0 5% 5rem; }
+.product-visual .frame {
+  max-width: 1100px; margin: 0 auto;
+  aspect-ratio: 16/9;
+  background: var(--cream-deep);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.product-visual .frame img { width: 100%; height: 100%; object-fit: cover; }
+
+.product-features { background: var(--cream-deep); padding: 6rem 5%; }
+.product-features-inner { max-width: 1100px; margin: 0 auto; }
+.product-features-header { text-align: center; margin-bottom: 3.5rem; }
+.product-features-header h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+  font-weight: 400; letter-spacing: -0.02em;
+}
+.product-features-header h3 em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+.feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
+@media (max-width: 768px) { .feature-list { grid-template-columns: 1fr; } }
+.feature { display: flex; gap: 1.2rem; align-items: flex-start; }
+.feature .marker {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+  color: var(--terracotta); font-size: 1.6rem; line-height: 1;
+  flex-shrink: 0; width: 2.4rem;
+}
+.feature h4 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 1.15rem; margin-bottom: 0.4rem; letter-spacing: -0.01em;
+}
+.feature p { color: var(--ink-soft); font-size: 0.95rem; }
+
+.crosslink { background: var(--cream); padding: 6rem 5%; text-align: center; }
+.crosslink-inner { max-width: 800px; margin: 0 auto; }
+.crosslink h3 {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-weight: 400; letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.crosslink p { color: var(--ink-soft); margin-bottom: 2.5rem; font-size: 1.05rem; }
+.crosslink-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.linkbtn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 0.95rem 1.8rem;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500; font-size: 0.95rem;
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: all 0.3s;
+}
+.linkbtn:hover { background: var(--ink); color: var(--cream); }
+.linkbtn.primary {
+  background: var(--terracotta); border-color: var(--terracotta);
+  color: var(--cream);
+}
+.linkbtn.primary:hover { background: var(--terracotta-deep); border-color: var(--terracotta-deep); }
+
+/* Footer */
+footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 3rem 5%;
+  text-align: center;
+}
+footer .footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; flex-direction: column;
+  gap: 0.8rem; align-items: center;
+}
+footer .brand {
+  font-family: 'Fraunces', serif;
+  font-style: italic; font-weight: 500;
+  font-size: 1.4rem; color: var(--terracotta);
+}
+footer .meta { font-size: 0.85rem; opacity: 0.6; }
+
+/* Placeholders */
+.placeholder-bg {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-style: italic;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.85);
+  position: relative; overflow: hidden;
+}
+.placeholder-cupcake {
+  background: linear-gradient(135deg, #f4d4a8 0%, #d99c5e 60%, #a06438 100%);
+}
+.placeholder-pizza {
+  background: linear-gradient(135deg, #c87454 0%, #983720 60%, #5e1f0f 100%);
+}
+.placeholder-cupcake-product {
+  background: linear-gradient(160deg, #e8c8a0 0%, #b48556 100%);
+  color: #5a3820;
+}
+.placeholder-pizza-product {
+  background: linear-gradient(160deg, #b8553c 0%, #722818 100%);
+  color: #f4d4a8;
+}
+.placeholder-concept {
+  background: linear-gradient(135deg, #d4b89a 0%, #8a6238 100%);
+  color: #fff;
+}
+.placeholder-anchor-cake {
+  background: linear-gradient(140deg, #efd4ad 0%, #c89968 100%);
+  color: #5a3820;
+}
+.placeholder-anchor-pie {
+  background: linear-gradient(140deg, #c8654b 0%, #7f2c1c 100%);
+  color: #f4d4a8;
+}
+.placeholder-label {
+  font-size: 1rem; text-align: center;
+  padding: 0.8rem 1.5rem;
+  border: 1px dashed currentColor;
+  border-radius: 6px;
+  opacity: 0.6; font-style: italic;
+  max-width: 80%;
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">PocketPans</div>
-    <nav>
-      <a href="#" style="margin:0 18px; text-decoration:none; color:#333; font-weight:500;">Shop</a>
-      <a href="#" style="margin:0 18px; text-decoration:none; color:#333; font-weight:500;">Recipes</a>
-      <a href="#" style="margin:0 18px; text-decoration:none; color:#333; font-weight:500;">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="nav">
+    <button class="logo" id="logo-home">
+      <span>Pocket</span><span class="accent">Pans</span>
+    </button>
+    <div class="nav-meta">Fillable Bakeware · by Paulegone</div>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img id="pizza-image" class="hero-image" src="https://picsum.photos/id/1015/2000/1200" alt="PocketPies">
-    <div id="cupcake-reveal" style="position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:2;">
-      <img id="cupcake-image" class="hero-image" src="https://picsum.photos/id/201/2000/1200" alt="PocketCakes">
+<section class="hero" id="hero">
+  <!--
+    Both image layers are SIBLINGS, fully overlapping the hero.
+    Each is clipped via clip-path to reveal only the portion the divider exposes.
+    Cupcake image is anchored to its left-half position via the inner img-wrap.
+    Pizza image is anchored to its right-half position via the inner img-wrap.
+    Images do NOT move with the divider.
+  -->
+
+  <!-- Pizza layer (right side) -->
+  <div class="image-layer full-width" id="pizza-layer">
+    <div class="img-wrap">
+      <div class="placeholder-bg placeholder-pizza" id="pizza-placeholder">
+        <span class="placeholder-label">Deep dish pizza cross-section</span>
+      </div>
+      <!-- Replace placeholder above with: <img src="..." alt="PocketPies deep dish pizza"> -->
     </div>
+  </div>
 
-    <div class="slider-container" id="slider">
-      <div class="slider-divider" id="divider">
-        <div class="slider-handle" id="handle">⇆</div>
+  <!-- Cupcake layer (left side) — on top so we can clip from the right -->
+  <div class="image-layer full-width" id="cupcake-layer">
+    <div class="img-wrap">
+      <div class="placeholder-bg placeholder-cupcake" id="cupcake-placeholder">
+        <span class="placeholder-label">Filled cupcake cross-section</span>
+      </div>
+      <!-- Replace placeholder above with: <img src="..." alt="PocketCakes filled cupcake"> -->
+    </div>
+  </div>
+
+  <!-- Labels -->
+  <div class="hero-label left">
+    Standard
+    <span class="name">PocketCakes</span>
+  </div>
+  <div class="hero-label right">
+    Personal
+    <span class="name">PocketPies</span>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider" id="divider">
+    <div class="handle-desktop">
+      <span class="arrow">‹</span>
+      <span class="arrow">›</span>
+    </div>
+  </div>
+
+  <!-- Drag area -->
+  <div class="slider-area" id="slider-area"></div>
+
+  <!-- Mobile pills -->
+  <div class="pill-controls">
+    <button class="pill pill-side left" id="pill-left">PocketCakes</button>
+    <button class="pill pill-center active" id="pill-center" aria-label="Both">P</button>
+    <button class="pill pill-side right" id="pill-right">PocketPies</button>
+  </div>
+</section>
+
+<div class="content-wrap">
+
+<!-- BRAND -->
+<div class="section active" id="brand-section">
+
+  <div class="brand-intro">
+    <div class="eyebrow">Premium Silicone Bakeware</div>
+    <h1 class="serif">One pan, <em>two sizes,</em><br>endless fillable creations.</h1>
+    <p class="lead">A baking system designed around the moment everyone loves most — the surprise inside. Cream-filled cupcakes. Deep-dish pizzas with a pocket of cheese. Pot pies, hand pies, and everything in between.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-grid">
+      <div class="concept-visual">
+        <div class="placeholder-bg placeholder-concept">
+          <span class="placeholder-label">Insert + pan, hero shot</span>
+        </div>
+      </div>
+      <div class="concept-text">
+        <div class="eyebrow">The fillable system</div>
+        <h2 class="serif">A pocket molded <em>right into the bake.</em></h2>
+        <p>Each PocketPans set includes a unique silicone insert that nests into the cavity during baking, creating a perfect well in every cupcake, muffin, mini pizza, or pie that comes out.</p>
+        <p>No more coring out cupcakes with a paring knife. No more hollowing out pizza dough by hand. The pocket is already there — ready for cream, custard, sauce, cheese, fruit, ganache, or whatever you can imagine.</p>
       </div>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="content" id="content-area">
-
-    <!-- CENTER / BRAND - PROFESSIONAL SECTIONS -->
-    <div id="brand-content" class="section brand-section active">
-
-      <!-- Hero Intro -->
-      <div class="brand-hero">
-        <h1>One Pan. Two Sizes.<br>Endless Creations.</h1>
-        <p style="font-size:1.5rem; max-width:760px; margin:0 auto;">
-          Premium food-grade silicone bakeware featuring our patented snap-in fillable pocket system.
-        </p>
+  <div class="capabilities">
+    <div class="capabilities-inner">
+      <div class="capabilities-header">
+        <div class="eyebrow">Two pans, dozens of possibilities</div>
+        <h2 class="serif">From sweet to savory, <em>brunch to dinner.</em></h2>
       </div>
-
-      <!-- Feature 1 -->
-      <div class="brand-feature light">
-        <h2 style="text-align:center;">Snap-In Fillable Pockets</h2>
-        <p style="text-align:center;">Our innovative inserts snap into place to create a perfect deep pocket in every bake. Fill with cream, chocolate, cheese, fruit compote, or savory sauces — the possibilities are endless.</p>
-      </div>
-
-      <!-- Feature 2 -->
-      <div class="brand-feature warm">
-        <h2 style="text-align:center;">Smart & Stackable Design</h2>
-        <p style="text-align:center;">Both the pans and inserts are designed to nest together beautifully, saving valuable kitchen space while keeping everything organized and ready for your next creation.</p>
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="brand-feature neutral">
-        <h2 style="text-align:center;">Built for Real Bakers</h2>
-        <p style="text-align:center;">Dishwasher safe, food-grade silicone, oven and freezer safe up to 446°F, non-stick, and incredibly durable. Professional performance for home kitchens.</p>
-      </div>
-
-    </div>
-
-    <!-- POCKETPIES -->
-    <div id="pizza-content" class="section product-full">
-      <img src="https://picsum.photos/id/1015/2000/1200" alt="PocketPies">
-      <div class="overlay">
-        <h1>PocketPies</h1>
-        <h2 style="color:#ffcc99;">Personal Deep Dish Pizzas • Pot Pies • Hand Pies</h2>
-        <p>Makes 9 perfectly filled personal creations with generous pockets every time.</p>
-        <button class="cta-button" onclick="window.open('https://amazon.com','_blank')">Buy PocketPies on Amazon</button>
+      <div class="capabilities-grid">
+        <div class="cap-card">
+          <span class="num">01</span>
+          <h3 class="serif">Sweet pockets</h3>
+          <p>Cream-filled cupcakes, jam-filled muffins, custard cups, mini cheesecakes, mousse cups, and dessert tarts.</p>
+        </div>
+        <div class="cap-card">
+          <span class="num">02</span>
+          <h3 class="serif">Savory pockets</h3>
+          <p>Personal deep dish pizzas, mini pot pies, hand pies, turnovers, calzones, and stuffed bread cups.</p>
+        </div>
+        <div class="cap-card">
+          <span class="num">03</span>
+          <h3 class="serif">Brunch & breakfast</h3>
+          <p>Egg bites, mini quiches, frittata cups, fillable cinnamon rolls, and breakfast bread bowls.</p>
+        </div>
       </div>
     </div>
-
-    <!-- POCKETCAKES -->
-    <div id="cupcake-content" class="section product-full">
-      <img src="https://picsum.photos/id/201/2000/1200" alt="PocketCakes">
-      <div class="overlay">
-        <h1>PocketCakes</h1>
-        <h2 style="color:#ffcc99;">Filled Cupcakes • Muffins • Mini Cakes</h2>
-        <p>Makes 12 stunning filled cupcakes with our signature deep pocket system.</p>
-        <button class="cta-button" onclick="window.open('https://amazon.com','_blank')">Buy PocketCakes on Amazon</button>
-      </div>
-    </div>
-
   </div>
 
-  <footer>
-    <p>&copy; 2026 PocketPans • Premium Silicone Bakeware</p>
-  </footer>
+  <div class="quality-strip">
+    <div class="quality-inner">
+      <div class="quality-item">
+        <div class="label">Material</div>
+        <div class="value">Food-Grade Silicone</div>
+      </div>
+      <div class="quality-item">
+        <div class="label">Heat Rating</div>
+        <div class="value">Up to 450°F</div>
+      </div>
+      <div class="quality-item">
+        <div class="label">Care</div>
+        <div class="value">Dishwasher Safe</div>
+      </div>
+      <div class="quality-item">
+        <div class="label">Certifications</div>
+        <div class="value">BPA-Free</div>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    const slider = document.getElementById('slider');
-    const divider = document.getElementById('divider');
-    const cupcakeReveal = document.getElementById('cupcake-reveal');
-    const pizzaContent = document.getElementById('pizza-content');
-    const cupcakeContent = document.getElementById('cupcake-content');
-    const brandContent = document.getElementById('brand-content');
+  <div class="variant-anchors">
+    <div class="variant-anchors-inner">
+      <div class="variant-anchors-header">
+        <h2 class="serif">Choose your <em>pocket.</em></h2>
+      </div>
+      <div class="anchor-row">
+        <a class="anchor-card" data-target="cupcake" href="#">
+          <div class="visual">
+            <div class="placeholder-bg placeholder-anchor-cake">
+              <span class="placeholder-label">Cupcake angle</span>
+            </div>
+          </div>
+          <div class="eyebrow">Standard Size · Makes 12</div>
+          <h3 class="serif">PocketCakes</h3>
+          <p class="desc">Three pans, twelve cavities, twelve matching inserts. The fillable bakeware system for cupcakes, muffins, and mini desserts.</p>
+          <span class="arrow-link">Explore PocketCakes</span>
+        </a>
+        <a class="anchor-card" data-target="pizza" href="#">
+          <div class="visual">
+            <div class="placeholder-bg placeholder-anchor-pie">
+              <span class="placeholder-label">Pizza angle</span>
+            </div>
+          </div>
+          <div class="eyebrow">Personal Size · Makes 9</div>
+          <h3 class="serif">PocketPies</h3>
+          <p class="desc">Three pans, nine cavities, nine matching inserts. Personal deep dish pizzas, pot pies, hand pies, and savory bakes.</p>
+          <span class="arrow-link">Explore PocketPies</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-    let isDragging = false;
+</div>
 
-    function updatePosition(clientX) {
-      const rect = slider.getBoundingClientRect();
-      let percent = ((clientX - rect.left) / rect.width) * 100;
-      percent = Math.max(5, Math.min(95, percent));
+<!-- POCKETCAKES -->
+<div class="section product-view" id="cupcake-section">
+  <div class="product-hero">
+    <div class="eyebrow">PocketPans · Standard Size</div>
+    <h2 class="serif">PocketCakes</h2>
+    <p class="tagline">A pocket inside every cupcake. Cream, custard, jam, ganache — fill it however you imagine.</p>
+    <div class="price-line">
+      <span class="price">$19.88</span>
+      <span class="price-note">Launch Price</span>
+    </div>
+    <div>
+      <a class="buy-cta" href="https://www.amazon.com/dp/B0H24Z696P" target="_blank" rel="noopener">Buy on Amazon</a>
+    </div>
+  </div>
 
-      divider.style.left = percent + '%';
-      cupcakeReveal.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+  <div class="product-visual">
+    <div class="frame">
+      <div class="placeholder-bg placeholder-cupcake-product">
+        <span class="placeholder-label">PocketCakes hero — finished filled cupcakes</span>
+      </div>
+    </div>
+  </div>
 
-      if (percent < 42) {
-        pizzaContent.classList.add('active');
-        cupcakeContent.classList.remove('active');
-        brandContent.classList.remove('active');
-      } else if (percent > 58) {
-        cupcakeContent.classList.add('active');
-        pizzaContent.classList.remove('active');
-        brandContent.classList.remove('active');
-      } else {
-        brandContent.classList.add('active');
-        pizzaContent.classList.remove('active');
-        cupcakeContent.classList.remove('active');
+  <div class="product-features">
+    <div class="product-features-inner">
+      <div class="product-features-header">
+        <h3 class="serif">What's <em>in the box.</em></h3>
+      </div>
+      <div class="feature-list">
+        <div class="feature">
+          <span class="marker">01</span>
+          <div>
+            <h4 class="serif">Three silicone pans</h4>
+            <p>Each with four cavities, sized for standard cupcakes and muffins. Twelve total per batch.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">02</span>
+          <div>
+            <h4 class="serif">Twelve fillable inserts</h4>
+            <p>One per cavity. Snap into the dough before baking to mold the pocket.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">03</span>
+          <div>
+            <h4 class="serif">Food-grade silicone</h4>
+            <p>BPA-free, heat-safe to 450°F, non-stick, dishwasher safe, oven and freezer safe.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">04</span>
+          <div>
+            <h4 class="serif">Endless use cases</h4>
+            <p>Cream-filled cupcakes, jam muffins, mini cheesecakes, egg bites, mousse cups, fillable tarts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="crosslink">
+    <div class="crosslink-inner">
+      <h3 class="serif">Going savory next time?</h3>
+      <p>PocketPies brings the same fillable system to personal deep-dish pizzas, pot pies, and hand pies.</p>
+      <div class="crosslink-buttons">
+        <a class="linkbtn primary" data-target="pizza" href="#">See PocketPies →</a>
+        <a class="linkbtn" data-target="brand" href="#">Back to overview</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POCKETPIES -->
+<div class="section product-view" id="pizza-section">
+  <div class="product-hero">
+    <div class="eyebrow">PocketPans · Personal Size</div>
+    <h2 class="serif">PocketPies</h2>
+    <p class="tagline">A deep pocket molded into every pie. Personal pizzas, pot pies, hand pies, and savory bakes.</p>
+    <div class="price-line">
+      <span class="price">$26.88</span>
+      <span class="price-note">Launch Price</span>
+    </div>
+    <div>
+      <a class="buy-cta" href="https://www.amazon.com/dp/B0GPR6FM7M" target="_blank" rel="noopener">Buy on Amazon</a>
+    </div>
+  </div>
+
+  <div class="product-visual">
+    <div class="frame">
+      <div class="placeholder-bg placeholder-pizza-product">
+        <span class="placeholder-label">PocketPies hero — finished personal pizza</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-features">
+    <div class="product-features-inner">
+      <div class="product-features-header">
+        <h3 class="serif">What's <em>in the box.</em></h3>
+      </div>
+      <div class="feature-list">
+        <div class="feature">
+          <span class="marker">01</span>
+          <div>
+            <h4 class="serif">Three silicone pans</h4>
+            <p>Each with three larger cavities, sized for personal deep-dish bakes. Nine total per batch.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">02</span>
+          <div>
+            <h4 class="serif">Nine fillable inserts</h4>
+            <p>One per cavity. Snap into the dough to mold a deep, generous well.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">03</span>
+          <div>
+            <h4 class="serif">Food-grade silicone</h4>
+            <p>BPA-free, heat-safe to 450°F, non-stick, dishwasher safe, oven and freezer safe.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="marker">04</span>
+          <div>
+            <h4 class="serif">Family-meal sized</h4>
+            <p>Personal pizzas, pot pies, hand pies, quiches, calzones, and stuffed bread bowls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="crosslink">
+    <div class="crosslink-inner">
+      <h3 class="serif">Sweet on the brain?</h3>
+      <p>PocketCakes brings the same fillable system to standard cupcakes and muffins — cream-filled, jam-filled, custard-filled.</p>
+      <div class="crosslink-buttons">
+        <a class="linkbtn primary" data-target="cupcake" href="#">See PocketCakes →</a>
+        <a class="linkbtn" data-target="brand" href="#">Back to overview</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="brand">PocketPans</div>
+    <div class="meta">A Paulegone brand · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const divider = document.getElementById('divider');
+  const cupcakeLayer = document.getElementById('cupcake-layer');
+  const pizzaLayer = document.getElementById('pizza-layer');
+  const sliderArea = document.getElementById('slider-area');
+
+  const brandSection = document.getElementById('brand-section');
+  const cupcakeSection = document.getElementById('cupcake-section');
+  const pizzaSection = document.getElementById('pizza-section');
+
+  const pillLeft = document.getElementById('pill-left');
+  const pillRight = document.getElementById('pill-right');
+  const pillCenter = document.getElementById('pill-center');
+  const logoHome = document.getElementById('logo-home');
+
+  let currentState = 'brand';
+  let isDragging = false;
+  let dragPercent = 50;
+  const THRESHOLD = 20;
+
+  /**
+   * Set the divider position and update clip-paths on both image layers.
+   * Cupcake layer is clipped from the RIGHT (inset right). At 50% divider,
+   *   cupcake layer shows from 0% to 50% (left half).
+   *   At 100% divider, cupcake layer shows fully (0% to 100%).
+   * Pizza layer is clipped from the LEFT (inset left). At 50% divider,
+   *   pizza layer shows from 50% to 100% (right half).
+   *   At 0% divider, pizza layer shows fully.
+   */
+  function setDivider(percent, animate) {
+    const elements = [divider, cupcakeLayer, pizzaLayer];
+    if (animate) {
+      elements.forEach(el => el.classList.add('animating'));
+    } else {
+      elements.forEach(el => el.classList.remove('animating'));
+    }
+    divider.style.left = percent + '%';
+    // Cupcake layer: visible from 0% to <percent>%, clipped from the right by (100 - percent)%
+    cupcakeLayer.style.clipPath = 'inset(0 ' + (100 - percent) + '% 0 0)';
+    // Pizza layer: visible from <percent>% to 100%, clipped from the left by <percent>%
+    pizzaLayer.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
+    dragPercent = percent;
+  }
+
+  function setActivePill(state) {
+    pillLeft.classList.toggle('active', state === 'cupcake');
+    pillRight.classList.toggle('active', state === 'pizza');
+    pillCenter.classList.toggle('active', state === 'brand');
+  }
+
+  function showSection(state) {
+    brandSection.classList.toggle('active', state === 'brand');
+    cupcakeSection.classList.toggle('active', state === 'cupcake');
+    pizzaSection.classList.toggle('active', state === 'pizza');
+  }
+
+  function getDividerTarget(state) {
+    if (state === 'cupcake') return 100;
+    if (state === 'pizza') return 0;
+    return 50;
+  }
+
+  function transitionTo(state, scrollToHero) {
+    if (state === currentState) return;
+    if (scrollToHero === undefined) scrollToHero = true;
+
+    // Fade out current section immediately
+    showSection(null);
+
+    // Animate divider
+    setDivider(getDividerTarget(state), true);
+    setActivePill(state);
+
+    setTimeout(() => {
+      currentState = state;
+      showSection(state);
+      if (scrollToHero) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          const heroBottom = document.getElementById('hero').offsetHeight;
+          window.scrollTo({ top: heroBottom - 80, behavior: 'smooth' });
+        }, 800);
       }
+    }, 1250);
+  }
+
+  function snapToNearest(percent) {
+    let target;
+    if (percent < 50 - THRESHOLD) {
+      target = 'pizza';
+    } else if (percent > 50 + THRESHOLD) {
+      target = 'cupcake';
+    } else {
+      target = 'brand';
     }
 
-    slider.addEventListener('mousedown', e => { isDragging = true; updatePosition(e.clientX); });
-    document.addEventListener('mousemove', e => { if (isDragging) updatePosition(e.clientX); });
-    document.addEventListener('mouseup', () => isDragging = false);
+    if (target === currentState) {
+      // No state change needed; just snap divider back to canonical position
+      setDivider(getDividerTarget(target), true);
+      return;
+    }
 
-    slider.addEventListener('touchstart', e => { isDragging = true; updatePosition(e.touches[0].clientX); });
-    document.addEventListener('touchmove', e => { if (isDragging) updatePosition(e.touches[0].clientX); });
-    document.addEventListener('touchend', () => isDragging = false);
+    // Transitioning to new state
+    showSection(null);
+    setDivider(getDividerTarget(target), true);
+    setActivePill(target);
+    setTimeout(() => {
+      currentState = target;
+      showSection(target);
+    }, 1250);
+  }
 
-    window.addEventListener('load', () => updatePosition(window.innerWidth * 0.5));
-  </script>
+  // Drag handlers
+  function getX(e) {
+    if (e.touches && e.touches.length) return e.touches[0].clientX;
+    return e.clientX;
+  }
+  function updateDrag(e) {
+    if (!isDragging) return;
+    const rect = sliderArea.getBoundingClientRect();
+    let pct = ((getX(e) - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    setDivider(pct, false);
+
+    // Fade current section as it moves away from its "home" divider position
+    const home = getDividerTarget(currentState);
+    const dist = Math.abs(pct - home);
+    const fadeAmount = Math.min(1, dist / 30);
+    const currentSection = (
+      currentState === 'brand' ? brandSection :
+      currentState === 'cupcake' ? cupcakeSection :
+      pizzaSection
+    );
+    if (currentSection) {
+      currentSection.style.opacity = (1 - fadeAmount * 0.6).toString();
+    }
+  }
+  function startDrag(e) {
+    isDragging = true;
+    e.preventDefault();
+    updateDrag(e);
+  }
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    // Reset inline opacities — transitions will handle the fade properly
+    brandSection.style.opacity = '';
+    cupcakeSection.style.opacity = '';
+    pizzaSection.style.opacity = '';
+    snapToNearest(dragPercent);
+  }
+
+  sliderArea.addEventListener('mousedown', startDrag);
+  sliderArea.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('mousemove', updateDrag);
+  document.addEventListener('touchmove', updateDrag, { passive: false });
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchend', endDrag);
+  document.addEventListener('touchcancel', endDrag);
+
+  // Pills
+  pillLeft.addEventListener('click', () => transitionTo('cupcake'));
+  pillRight.addEventListener('click', () => transitionTo('pizza'));
+  pillCenter.addEventListener('click', () => transitionTo('brand'));
+
+  // Anchor links
+  document.querySelectorAll('[data-target]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = link.getAttribute('data-target');
+      transitionTo(target);
+    });
+  });
+
+  // Logo
+  logoHome.addEventListener('click', () => {
+    if (currentState === 'brand') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      transitionTo('brand');
+    }
+  });
+
+  // Init
+  setDivider(50, false);
+  setActivePill('brand');
+  showSection('brand');
+
+})();
+</script>
+
 </body>
 </html>
