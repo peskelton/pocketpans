@@ -107,6 +107,9 @@ header {
   -webkit-user-drag: none;
   pointer-events: none;
 }
+.image-layer {
+  transition: clip-path 0.4s ease;
+}
 
 #cupcake-layer {
   left: 0;
@@ -1029,28 +1032,27 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
   let dragPercent = 50;
   const THRESHOLD = 20;
 
-  /**
-   * Set the divider position and update clip-paths on both image layers.
-   * Cupcake layer is clipped from the RIGHT (inset right). At 50% divider,
-   *   cupcake layer shows from 0% to 50% (left half).
-   *   At 100% divider, cupcake layer shows fully (0% to 100%).
-   * Pizza layer is clipped from the LEFT (inset left). At 50% divider,
-   *   pizza layer shows from 50% to 100% (right half).
-   *   At 0% divider, pizza layer shows fully.
-   */
-  function setDivider(percent, animate) {
-    const elements = [divider, cupcakeLayer, pizzaLayer];
-    if (animate) {
-      elements.forEach(el => el.classList.add('animating'));
-    } else {
-      elements.forEach(el => el.classList.remove('animating'));
-    }
-    divider.style.left = percent + '%';
-    // Cupcake layer: visible from 0% to <percent>%, clipped from the right by (100 - percent)%
-    cupcakeLayer.style.clipPath = 'inset(0 ' + (100 - percent) + '% 0 0)';
-    // Pizza layer: visible from <percent>% to 100%, clipped from the left by <percent>%
-    pizzaLayer.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
+  function setDivider(percent, animate = false) {
+    percent = Math.max(0, Math.min(100, percent));
     dragPercent = percent;
+
+    if (animate) {
+      divider.classList.add('animating');
+      cupcakeLayer.classList.add('animating');
+      pizzaLayer.classList.add('animating');
+    } else {
+      divider.classList.remove('animating');
+      cupcakeLayer.classList.remove('animating');
+      pizzaLayer.classList.remove('animating');
+    }
+
+    divider.style.left = percent + '%';
+    
+    // Cupcake (left layer) visible from 0% to percent%
+    cupcakeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    
+    // Pizza (right layer) visible from percent% to 100%
+    pizzaLayer.style.clipPath = `inset(0 0 0 ${percent}%)`;
   }
 
   function setActivePill(state) {
@@ -1075,10 +1077,7 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
     if (state === currentState) return;
     if (scrollToHero === undefined) scrollToHero = true;
 
-    // Fade out current section immediately
     showSection(null);
-
-    // Animate divider
     setDivider(getDividerTarget(state), true);
     setActivePill(state);
 
@@ -1087,38 +1086,22 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
       showSection(state);
       if (scrollToHero) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => {
-          const heroBottom = document.getElementById('hero').offsetHeight;
-          window.scrollTo({ top: heroBottom - 80, behavior: 'smooth' });
-        }, 800);
       }
     }, 1250);
   }
 
   function snapToNearest(percent) {
     let target;
-    if (percent < 50 - THRESHOLD) {
-      target = 'pizza';
-    } else if (percent > 50 + THRESHOLD) {
-      target = 'cupcake';
-    } else {
-      target = 'brand';
-    }
+    if (percent < 50 - THRESHOLD) target = 'pizza';
+    else if (percent > 50 + THRESHOLD) target = 'cupcake';
+    else target = 'brand';
 
     if (target === currentState) {
-      // No state change needed; just snap divider back to canonical position
       setDivider(getDividerTarget(target), true);
       return;
     }
 
-    // Transitioning to new state
-    showSection(null);
-    setDivider(getDividerTarget(target), true);
-    setActivePill(target);
-    setTimeout(() => {
-      currentState = target;
-      showSection(target);
-    }, 1250);
+    transitionTo(target, false);
   }
 
   // Drag handlers
@@ -1126,38 +1109,24 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
     if (e.touches && e.touches.length) return e.touches[0].clientX;
     return e.clientX;
   }
+
   function updateDrag(e) {
     if (!isDragging) return;
     const rect = sliderArea.getBoundingClientRect();
     let pct = ((getX(e) - rect.left) / rect.width) * 100;
     pct = Math.max(0, Math.min(100, pct));
     setDivider(pct, false);
-
-    // Fade current section as it moves away from its "home" divider position
-    const home = getDividerTarget(currentState);
-    const dist = Math.abs(pct - home);
-    const fadeAmount = Math.min(1, dist / 30);
-    const currentSection = (
-      currentState === 'brand' ? brandSection :
-      currentState === 'cupcake' ? cupcakeSection :
-      pizzaSection
-    );
-    if (currentSection) {
-      currentSection.style.opacity = (1 - fadeAmount * 0.6).toString();
-    }
   }
+
   function startDrag(e) {
     isDragging = true;
     e.preventDefault();
     updateDrag(e);
   }
+
   function endDrag() {
     if (!isDragging) return;
     isDragging = false;
-    // Reset inline opacities — transitions will handle the fade properly
-    brandSection.style.opacity = '';
-    cupcakeSection.style.opacity = '';
-    pizzaSection.style.opacity = '';
     snapToNearest(dragPercent);
   }
 
@@ -1199,6 +1168,6 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
 
 })();
 </script>
-
+  
 </body>
 </html>
