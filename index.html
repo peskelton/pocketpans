@@ -691,31 +691,19 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
 </header>
 
 <section class="hero" id="hero">
-  <!--
-    Both image layers are SIBLINGS, fully overlapping the hero.
-    Each is clipped via clip-path to reveal only the portion the divider exposes.
-    Cupcake image is anchored to its left-half position via the inner img-wrap.
-    Pizza image is anchored to its right-half position via the inner img-wrap.
-    Images do NOT move with the divider.
-  -->
-
   <!-- Pizza layer (right side) -->
   <div class="image-layer full-width" id="pizza-layer">
     <div class="img-wrap">
-      <div class="placeholder-bg placeholder-pizza" id="pizza-placeholder">
-        <span class="placeholder-label">Deep dish pizza cross-section</span>
-      </div>
-      <!-- Replace placeholder above with: <img src="..." alt="PocketPies deep dish pizza"> -->
+      <!-- Replace the placeholder with your real pizza image -->
+      <img src="images/hero-pizza.png" alt="PocketPies deep dish pizza cross-section">
     </div>
   </div>
 
   <!-- Cupcake layer (left side) — on top so we can clip from the right -->
   <div class="image-layer full-width" id="cupcake-layer">
     <div class="img-wrap">
-      <div class="placeholder-bg placeholder-cupcake" id="cupcake-placeholder">
-        <span class="placeholder-label">Filled cupcake cross-section</span>
-      </div>
-      <!-- Replace placeholder above with: <img src="..." alt="PocketCakes filled cupcake"> -->
+      <!-- Replace the placeholder with your real cupcake image -->
+      <img src="images/hero-cupcake.png" alt="PocketCakes filled cupcake cross-section">
     </div>
   </div>
 
@@ -1025,6 +1013,7 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
   const pillLeft = document.getElementById('pill-left');
   const pillRight = document.getElementById('pill-right');
   const pillCenter = document.getElementById('pill-center');
+  const logoHome = document.getElementById('logo-home');
 
   let currentState = 'brand';
   let isDragging = false;
@@ -1044,10 +1033,10 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
 
     divider.style.left = percent + '%';
     
-    // Cupcake (left layer) visible from 0% to percent%
+    // Cupcake (left) visible from 0% to percent%
     cupcakeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
     
-    // Pizza (right layer) visible from percent% to 100%
+    // Pizza (right) visible from percent% to 100%
     pizzaLayer.style.clipPath = `inset(0 0 0 ${percent}%)`;
   }
 
@@ -1076,39 +1065,38 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
     }, 800);
   }
 
-  // Desktop drag (only on wide screens)
-  function startDrag(e) {
-    if (window.innerWidth < 768) return; // Disable drag on mobile
+  // Desktop drag
+  sliderArea.addEventListener('mousedown', e => {
     isDragging = true;
-    updateDrag(e);
-  }
-
-  function updateDrag(e) {
-    if (!isDragging) return;
     const rect = sliderArea.getBoundingClientRect();
-    let pct = ((e.clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(0, Math.min(100, pct));
-    setDivider(pct, false);
-  }
+    setDivider(((e.clientX - rect.left) / rect.width) * 100, false);
+  });
 
-  function endDrag() {
-    if (!isDragging) return;
-    isDragging = false;
-    // Snap to nearest state
-    const pct = parseFloat(divider.style.left) || 50;
-    if (pct < 35) transitionTo('pizza');
-    else if (pct > 65) transitionTo('cupcake');
-    else transitionTo('brand');
-  }
+  document.addEventListener('mousemove', e => {
+    if (isDragging) {
+      const rect = sliderArea.getBoundingClientRect();
+      setDivider(((e.clientX - rect.left) / rect.width) * 100, false);
+    }
+  });
 
-  sliderArea.addEventListener('mousedown', startDrag);
-  document.addEventListener('mousemove', updateDrag);
-  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('mouseup', () => isDragging = false);
 
   // Mobile pills
   pillLeft.addEventListener('click', () => transitionTo('cupcake'));
   pillRight.addEventListener('click', () => transitionTo('pizza'));
   pillCenter.addEventListener('click', () => transitionTo('brand'));
+
+  // Anchor links
+  document.querySelectorAll('[data-target]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = link.getAttribute('data-target');
+      transitionTo(target);
+    });
+  });
+
+  // Logo
+  logoHome.addEventListener('click', () => transitionTo('brand'));
 
   // Init
   setDivider(50, false);
