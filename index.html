@@ -1017,8 +1017,19 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
 
   let currentState = 'brand';
   let isDragging = false;
+  let dragPercent = 50;
+  const THRESHOLD = 20;
 
-    function setDivider(percent, animate) {
+  /**
+   * Set the divider position and update clip-paths on both image layers.
+   * Cupcake layer is clipped from the RIGHT (inset right). At 50% divider,
+   *   cupcake layer shows from 0% to 50% (left half).
+   *   At 100% divider, cupcake layer shows fully (0% to 100%).
+   * Pizza layer is clipped from the LEFT (inset left). At 50% divider,
+   *   pizza layer shows from 50% to 100% (right half).
+   *   At 0% divider, pizza layer shows fully.
+   */
+  function setDivider(percent, animate) {
     const elements = [divider, cupcakeLayer, pizzaLayer];
     if (animate) {
       elements.forEach(el => el.classList.add('animating'));
@@ -1045,36 +1056,111 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
     pizzaSection.classList.toggle('active', state === 'pizza');
   }
 
-  function transitionTo(state) {
-    if (state === currentState) return;
+  function getDividerTarget(state) {
+    if (state === 'cupcake') return 100;
+    if (state === 'pizza') return 0;
+    return 50;
+  }
 
+  function transitionTo(state, scrollToHero) {
+    if (state === currentState) return;
+    if (scrollToHero === undefined) scrollToHero = true;
+
+    // Fade out current section immediately
     showSection(null);
-    setDivider(state === 'cupcake' ? 100 : state === 'pizza' ? 0 : 50, true);
+
+    // Animate divider
+    setDivider(getDividerTarget(state), true);
     setActivePill(state);
 
     setTimeout(() => {
       currentState = state;
       showSection(state);
-    }, 800);
+      if (scrollToHero) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          const heroBottom = document.getElementById('hero').offsetHeight;
+          window.scrollTo({ top: heroBottom - 80, behavior: 'smooth' });
+        }, 800);
+      }
+    }, 1250);
   }
 
-  // Desktop drag
-  sliderArea.addEventListener('mousedown', e => {
-    isDragging = true;
-    const rect = sliderArea.getBoundingClientRect();
-    setDivider(((e.clientX - rect.left) / rect.width) * 100, false);
-  });
-
-  document.addEventListener('mousemove', e => {
-    if (isDragging) {
-      const rect = sliderArea.getBoundingClientRect();
-      setDivider(((e.clientX - rect.left) / rect.width) * 100, false);
+  function snapToNearest(percent) {
+    let target;
+    if (percent < 50 - THRESHOLD) {
+      target = 'pizza';
+    } else if (percent > 50 + THRESHOLD) {
+      target = 'cupcake';
+    } else {
+      target = 'brand';
     }
-  });
 
-  document.addEventListener('mouseup', () => isDragging = false);
+    if (target === currentState) {
+      // No state change needed; just snap divider back to canonical position
+      setDivider(getDividerTarget(target), true);
+      return;
+    }
 
-  // Mobile pills
+    // Transitioning to new state
+    showSection(null);
+    setDivider(getDividerTarget(target), true);
+    setActivePill(target);
+    setTimeout(() => {
+      currentState = target;
+      showSection(target);
+    }, 1250);
+  }
+
+  // Drag handlers
+  function getX(e) {
+    if (e.touches && e.touches.length) return e.touches[0].clientX;
+    return e.clientX;
+  }
+  function updateDrag(e) {
+    if (!isDragging) return;
+    const rect = sliderArea.getBoundingClientRect();
+    let pct = ((getX(e) - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    setDivider(pct, false);
+
+    // Fade current section as it moves away from its "home" divider position
+    const home = getDividerTarget(currentState);
+    const dist = Math.abs(pct - home);
+    const fadeAmount = Math.min(1, dist / 30);
+    const currentSection = (
+      currentState === 'brand' ? brandSection :
+      currentState === 'cupcake' ? cupcakeSection :
+      pizzaSection
+    );
+    if (currentSection) {
+      currentSection.style.opacity = (1 - fadeAmount * 0.6).toString();
+    }
+  }
+  function startDrag(e) {
+    isDragging = true;
+    e.preventDefault();
+    updateDrag(e);
+  }
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    // Reset inline opacities — transitions will handle the fade properly
+    brandSection.style.opacity = '';
+    cupcakeSection.style.opacity = '';
+    pizzaSection.style.opacity = '';
+    snapToNearest(dragPercent);
+  }
+
+  sliderArea.addEventListener('mousedown', startDrag);
+  sliderArea.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('mousemove', updateDrag);
+  document.addEventListener('touchmove', updateDrag, { passive: false });
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchend', endDrag);
+  document.addEventListener('touchcancel', endDrag);
+
+  // Pills
   pillLeft.addEventListener('click', () => transitionTo('cupcake'));
   pillRight.addEventListener('click', () => transitionTo('pizza'));
   pillCenter.addEventListener('click', () => transitionTo('brand'));
@@ -1089,7 +1175,13 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
   });
 
   // Logo
-  logoHome.addEventListener('click', () => transitionTo('brand'));
+  logoHome.addEventListener('click', () => {
+    if (currentState === 'brand') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      transitionTo('brand');
+    }
+  });
 
   // Init
   setDivider(50, false);
