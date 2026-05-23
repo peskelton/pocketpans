@@ -1018,27 +1018,29 @@ footer .meta { font-size: 0.85rem; opacity: 0.6; }
   let currentState = 'brand';
   let isDragging = false;
 
-  function setDivider(percent, animate = false) {
-    percent = Math.max(0, Math.min(100, percent));
+ function setDivider(percent, animate = false) {
+  percent = Math.max(0, Math.min(100, percent));
 
-    if (animate) {
-      divider.classList.add('animating');
-      cupcakeLayer.classList.add('animating');
-      pizzaLayer.classList.add('animating');
-    } else {
-      divider.classList.remove('animating');
-      cupcakeLayer.classList.remove('animating');
-      pizzaLayer.classList.remove('animating');
-    }
-
-    divider.style.left = percent + '%';
-    
-    // Cupcake (left) visible from 0% to percent%
-    cupcakeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-    
-    // Pizza (right) visible from percent% to 100%
-    pizzaLayer.style.clipPath = `inset(0 0 0 ${percent}%)`;
+  if (animate) {
+    divider.classList.add('animating');
+    cupcakeLayer.classList.add('animating');
+    pizzaLayer.classList.add('animating');
+  } else {
+    divider.classList.remove('animating');
+    cupcakeLayer.classList.remove('animating');
+    pizzaLayer.classList.remove('animating');
   }
+
+  divider.style.left = percent + '%';
+
+  // FIXED: Cupcake (left) visible from 0% to percent%
+  cupcakeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+
+  // FIXED: Pizza (right) visible from percent% to 100%
+  pizzaLayer.style.clipPath = `inset(0 0 0 ${percent}%)`;
+
+  dragPercent = percent;
+}
 
   function setActivePill(state) {
     pillLeft.classList.toggle('active', state === 'cupcake');
