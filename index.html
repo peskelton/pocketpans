@@ -98,9 +98,10 @@ header {
   height: 4px;
   background: var(--cream);
   border-radius: 2px;
-  z-index: 20;
+  z-index: 30;
   pointer-events: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transform: translateZ(0);
 }
 .hero-underline.anim {
   transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1);
@@ -560,8 +561,9 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   -->
   <div class="hero-layer" id="layer-cupcake">
   <img src="images/hero-cupcake.png" alt="Filled cupcake cross-section">
-    <div class="hero-underline" id="hero-underline"></div>
 </div>
+
+  <div class="hero-underline" id="hero-underline"></div>
   
 
   <!-- Labels -->
@@ -914,6 +916,10 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 
   function onDragStart(e) {
     if (isMobile()) return;
+    // Only start drag if mousedown is on the divider handle area (within 30px)
+    const r = hero.getBoundingClientRect();
+    const clickPct = ((clientX(e) - r.left) / r.width) * 100;
+    if (Math.abs(clickPct - curPct) > 5) return;
     dragging = true;
     e.preventDefault();
     const pct = pctFromEvent(e);
