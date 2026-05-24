@@ -94,12 +94,13 @@ header {
 .hero-underline {
   position: absolute;
   bottom: 4.6rem;
-  width: 28px;
-  height: 2px;
+  width: 56px;
+  height: 4px;
   background: var(--cream);
+  border-radius: 2px;
   z-index: 9;
   pointer-events: none;
-  /* No transition during drag — JS sets this directly */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .hero-underline.anim {
   transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1);
@@ -167,15 +168,23 @@ header {
   transition: opacity 0.5s ease;
 }
 .hero-label .sub {
-  font-size: 0.72rem; letter-spacing: 0.22em;
-  text-transform: uppercase; font-weight: 500;
-  opacity: 0.75; display: block; margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0.75;
+  display: block;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 .hero-label .name {
-  font-family: 'Fraunces', serif; font-style: italic;
-  font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.4rem);
-  letter-spacing: -0.02em; display: block;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+  display: block;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.4);
 }
 .hero-label.left { left: 6%; }
 .hero-label.right { right: 6%; text-align: right; }
@@ -806,7 +815,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
       const t = (divPct - 50) / 50;
       px = pxCenter + (pxLeft - pxCenter) * t;
     }
-    return (px - 14) + 'px'; // center the 28px underline
+    return (px - 28) + 'px'; // center the 28px underline
   }
 
   function setUnderline(divPct, animate) {
