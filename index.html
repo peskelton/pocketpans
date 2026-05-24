@@ -107,7 +107,8 @@ header {
   transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1);
 }
 @media (max-width: 767px) {
-  .hero-underline { bottom: 7.6rem; }
+  .hero-label { display: none; }
+  .hero-underline { display: none; }
 }
 
 /* Pizza sits on the right half conceptually; anchor its subject to the left edge of the right half */
@@ -541,6 +542,53 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 .ph-anchor-pie { background: linear-gradient(140deg, #c8654b 0%, #7f2c1c 100%); }
 .ph-product-cake { background: linear-gradient(160deg, #e8c8a0 0%, #b48556 100%); color: rgba(80,40,10,0.7); }
 .ph-product-pie { background: linear-gradient(160deg, #b8553c 0%, #722818 100%); }
+  /* ─── MOBILE NAV BAR ─── */
+.mobile-nav {
+  display: none;
+  position: relative;
+  background: white;
+  padding: 0.6rem 1rem;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+@media (max-width: 767px) {
+  .mobile-nav { display: flex; }
+}
+.mobile-nav-pill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 0.8rem);
+  background: var(--terracotta);
+  border-radius: 999px;
+  z-index: 0;
+  pointer-events: none;
+  will-change: left, width;
+}
+.mobile-nav-pill.anim {
+  transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1),
+              width 0.95s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.mobile-nav-item {
+  position: relative;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-family: 'Fraunces', serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-nav-item.active {
+  color: white;
+}
 </style>
 </head>
 <body>
@@ -602,11 +650,12 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 <!-- Full-hero invisible drag surface -->
 <div style="position:absolute;inset:0;z-index:8;cursor:default;" id="drag-surface" aria-hidden="true"></div>
 
-<!-- Mobile pills -->
-<div class="pills">
-  <button class="pill pill-side pill-left" id="pill-left">PocketCakes</button>
-  <button class="pill pill-center active" id="pill-center" aria-label="Both products">P</button>
-  <button class="pill pill-side pill-right" id="pill-right">PocketPies</button>
+<!-- Mobile nav bar -->
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-pill" id="mobile-nav-pill"></div>
+  <button class="mobile-nav-item" id="mnav-cupcake">PocketCakes</button>
+  <button class="mobile-nav-item" id="mnav-brand">PocketPans</button>
+  <button class="mobile-nav-item" id="mnav-pizza">PocketPies</button>
 </div>
 
 </section>
@@ -865,38 +914,39 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     Animate only — no scrolling.
     Used by hero label clicks and pill clicks.
   */
-  function animateTo(newState) {
-    if (newState === state) {
-      setPos(targetPct(state), true);
-      return;
-    }
-    showSection(null);
-    setPills(newState);
-    setPos(targetPct(newState), true);
-    setTimeout(() => {
-      state = newState;
-      showSection(state);
-    }, ANIM_MS + 50);
+ function animateTo(newState) {
+  if (newState === state) {
+    setPos(targetPct(state), true);
+    updateMobileNav(state, true);
+    return;
   }
-
+  showSection(null);
+  setPills(newState);
+  updateMobileNav(newState, true);
+  setPos(targetPct(newState), true);
+  setTimeout(() => {
+    state = newState;
+    showSection(state);
+  }, ANIM_MS + 50);
+}
   /*
     Scroll to top first, then animate.
     Used by crosslink buttons at bottom of product sections.
   */
-  function scrollThenAnimate(newState) {
-    // Swap content immediately so it's ready when user arrives at top
-    if (newState !== state) {
-      showSection(null);
-      setPills(newState);
-    }
+ function scrollThenAnimate(newState) {
+  if (newState !== state) {
+    showSection(null);
+    setPills(newState);
+    updateMobileNav(newState, true);
+  }
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
     // After scroll settles, animate the divider
     setTimeout(() => {
-      setPos(targetPct(newState), true);
-      setTimeout(() => {
-        state = newState;
-        showSection(state);
+      setPos(50, false);
+    setPills('brand');
+    showSection('brand');
+    updateMobileNav('brand', false);
       }, ANIM_MS + 50);
     }, 600);
   }
@@ -976,10 +1026,41 @@ dragSurface.addEventListener('mousemove', (e) => {
   labelPizza.addEventListener('click',   () => animateTo('pizza'));
   labelBrand.addEventListener('click',   () => animateTo('brand'));
 
-  /* Pills — animate only, no scroll */
-  pillLeft.addEventListener('click',   () => animateTo('cupcake'));
-  pillRight.addEventListener('click',  () => animateTo('pizza'));
-  pillCenter.addEventListener('click', () => animateTo('brand'));
+  /* ── Mobile nav bar ── */
+const mnavCupcake = document.getElementById('mnav-cupcake');
+const mnavBrand   = document.getElementById('mnav-brand');
+const mnavPizza   = document.getElementById('mnav-pizza');
+const mnavPill    = document.getElementById('mobile-nav-pill');
+
+function updateMobileNav(s, animate) {
+  const items = {
+    cupcake: mnavCupcake,
+    brand:   mnavBrand,
+    pizza:   mnavPizza
+  };
+  // Update active class
+  Object.entries(items).forEach(([key, el]) => {
+    el.classList.toggle('active', key === s);
+  });
+  // Move pill to active item
+  const activeEl = items[s];
+  if (!activeEl) return;
+  const navRect  = document.getElementById('mobile-nav').getBoundingClientRect();
+  const itemRect = activeEl.getBoundingClientRect();
+  const left     = itemRect.left - navRect.left;
+  const width    = itemRect.width;
+  if (animate) {
+    mnavPill.classList.add('anim');
+  } else {
+    mnavPill.classList.remove('anim');
+  }
+  mnavPill.style.left  = left + 'px';
+  mnavPill.style.width = width + 'px';
+}
+
+mnavCupcake.addEventListener('click', () => animateTo('cupcake'));
+mnavBrand.addEventListener('click',   () => animateTo('brand'));
+mnavPizza.addEventListener('click',   () => animateTo('pizza'));
 
   /* Crosslink buttons — scroll then animate */
   document.querySelectorAll('[data-target]').forEach(el => {
