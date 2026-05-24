@@ -842,13 +842,14 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   const brandSec     = document.getElementById('brand-section');
   const cupcakeSec   = document.getElementById('cupcake-section');
   const pizzaSec     = document.getElementById('pizza-section');
-  const pillLeft     = document.getElementById('pill-left');
-  const pillRight    = document.getElementById('pill-right');
-  const pillCenter   = document.getElementById('pill-center');
   const logoBtn      = document.getElementById('logo-home');
   const labelCupcake = document.getElementById('label-cupcake');
   const labelPizza   = document.getElementById('label-pizza');
   const labelBrand   = document.getElementById('label-brand');
+  const mnavCupcake  = document.getElementById('mnav-cupcake');
+  const mnavBrand    = document.getElementById('mnav-brand');
+  const mnavPizza    = document.getElementById('mnav-pizza');
+  const mnavPill     = document.getElementById('mobile-nav-pill');
 
   let state    = 'brand';
   let dragging = false;
@@ -856,6 +857,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   const THRESH  = 20;
   const ANIM_MS = 1200;
 
+  /* ── Underline ── */
   function getUnderlineLeft(divPct) {
     const heroW    = hero.offsetWidth;
     const pxRight  = heroW * 0.88;
@@ -873,11 +875,13 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   }
 
   function setUnderline(divPct, animate) {
+    if (!underline) return;
     if (animate) underline.classList.add('anim');
     else underline.classList.remove('anim');
     underline.style.left = getUnderlineLeft(divPct);
   }
 
+  /* ── Divider position ── */
   function setPos(pct, animate) {
     curPct = Math.max(0, Math.min(100, pct));
     if (animate) {
@@ -892,65 +896,69 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     setUnderline(curPct, animate);
   }
 
+  /* ── Content sections ── */
   function showSection(s) {
     brandSec.classList.toggle('active',   s === 'brand');
     cupcakeSec.classList.toggle('active', s === 'cupcake');
     pizzaSec.classList.toggle('active',   s === 'pizza');
   }
 
-  function setPills(s) {
-    pillLeft.classList.toggle('active',   s === 'cupcake');
-    pillRight.classList.toggle('active',  s === 'pizza');
-    pillCenter.classList.toggle('active', s === 'brand');
+  /* ── Mobile nav ── */
+  function updateMobileNav(s, animate) {
+    const items = { cupcake: mnavCupcake, brand: mnavBrand, pizza: mnavPizza };
+    Object.entries(items).forEach(([key, el]) => {
+      if (el) el.classList.toggle('active', key === s);
+    });
+    const activeEl = items[s];
+    const navEl = document.getElementById('mobile-nav');
+    if (!activeEl || !navEl) return;
+    const navRect  = navEl.getBoundingClientRect();
+    const itemRect = activeEl.getBoundingClientRect();
+    if (animate) mnavPill.classList.add('anim');
+    else mnavPill.classList.remove('anim');
+    mnavPill.style.left  = (itemRect.left - navRect.left) + 'px';
+    mnavPill.style.width = itemRect.width + 'px';
   }
 
+  /* ── Target divider percent per state ── */
   function targetPct(s) {
     if (s === 'cupcake') return 100;
     if (s === 'pizza')   return 0;
     return 50;
   }
 
-  /* 
-    Animate only — no scrolling.
-    Used by hero label clicks and pill clicks.
-  */
- function animateTo(newState) {
-  if (newState === state) {
-    setPos(targetPct(state), true);
-    updateMobileNav(state, true);
-    return;
-  }
-  showSection(null);
-  setPills(newState);
-  updateMobileNav(newState, true);
-  setPos(targetPct(newState), true);
-  setTimeout(() => {
-    state = newState;
-    showSection(state);
-  }, ANIM_MS + 50);
-}
-  /*
-    Scroll to top first, then animate.
-    Used by crosslink buttons at bottom of product sections.
-  */
- function scrollThenAnimate(newState) {
-  if (newState !== state) {
+  /* ── Animate to state, no scroll ── */
+  function animateTo(newState) {
+    if (newState === state) {
+      setPos(targetPct(state), true);
+      updateMobileNav(state, true);
+      return;
+    }
     showSection(null);
-    setPills(newState);
     updateMobileNav(newState, true);
-  }
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // After scroll settles, animate the divider
+    setPos(targetPct(newState), true);
     setTimeout(() => {
-      setPos(50, false);
-    setPills('brand');
-    showSection('brand');
-    updateMobileNav('brand', false);
+      state = newState;
+      showSection(state);
+    }, ANIM_MS + 50);
+  }
+
+  /* ── Scroll to top then animate ── */
+  function scrollThenAnimate(newState) {
+    showSection(null);
+    updateMobileNav(newState, false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      setPos(targetPct(newState), true);
+      setTimeout(() => {
+        state = newState;
+        showSection(state);
+        updateMobileNav(newState, true);
       }, ANIM_MS + 50);
     }, 600);
   }
 
+  /* ── Snap divider to nearest state after drag ── */
   function resolveSnap(pct) {
     let snapState;
     if (pct < 50 - THRESH)      snapState = 'pizza';
@@ -959,6 +967,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     animateTo(snapState);
   }
 
+  /* ── Drag fade ── */
   function applyDragFade(pct) {
     const home = targetPct(state);
     const dist = Math.abs(pct - home);
@@ -973,6 +982,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     [brandSec, cupcakeSec, pizzaSec].forEach(s => { s.style.opacity = ''; });
   }
 
+  /* ── Pointer utilities ── */
   function clientX(e) {
     return e.touches ? e.touches[0].clientX : e.clientX;
   }
@@ -983,35 +993,36 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 
   const isMobile = () => window.innerWidth < 768;
 
-function onDragStart(e) {
-  if (isMobile()) return;
-  const r = hero.getBoundingClientRect();
-  const clickPct = ((clientX(e) - r.left) / r.width) * 100;
-  if (Math.abs(clickPct - curPct) > 5) return;
-  dragging = true;
-  e.preventDefault();
-  const pct = pctFromEvent(e);
-  setPos(pct, false);
-  applyDragFade(pct);
-}
-function onDragMove(e) {
-  if (!dragging) return;
-  const pct = pctFromEvent(e);
-  setPos(pct, false);
-  applyDragFade(pct);
-}
-function onDragEnd() {
-  if (!dragging) return;
-  dragging = false;
-  clearFade();
-  resolveSnap(curPct);
-}
-dragSurface.addEventListener('mousemove', (e) => {
-  if (isMobile()) return;
-  const r = hero.getBoundingClientRect();
-  const pct = ((e.clientX - r.left) / r.width) * 100;
-  dragSurface.style.cursor = Math.abs(pct - curPct) <= 5 ? 'ew-resize' : 'default';
-});
+  /* ── Drag handlers ── */
+  function onDragStart(e) {
+    if (isMobile()) return;
+    const r = hero.getBoundingClientRect();
+    const clickPct = ((clientX(e) - r.left) / r.width) * 100;
+    if (Math.abs(clickPct - curPct) > 5) return;
+    dragging = true;
+    e.preventDefault();
+    setPos(pctFromEvent(e), false);
+    applyDragFade(curPct);
+  }
+  function onDragMove(e) {
+    if (!dragging) return;
+    setPos(pctFromEvent(e), false);
+    applyDragFade(curPct);
+  }
+  function onDragEnd() {
+    if (!dragging) return;
+    dragging = false;
+    clearFade();
+    resolveSnap(curPct);
+  }
+
+  /* ── Cursor near handle ── */
+  dragSurface.addEventListener('mousemove', function(e) {
+    if (isMobile()) return;
+    const r = hero.getBoundingClientRect();
+    const pct = ((e.clientX - r.left) / r.width) * 100;
+    dragSurface.style.cursor = Math.abs(pct - curPct) <= 5 ? 'ew-resize' : 'default';
+  });
 
   dragSurface.addEventListener('mousedown',  onDragStart);
   dragSurface.addEventListener('touchstart', onDragStart, { passive: false });
@@ -1021,48 +1032,17 @@ dragSurface.addEventListener('mousemove', (e) => {
   document.addEventListener('touchend',   onDragEnd);
   document.addEventListener('touchcancel',onDragEnd);
 
-  /* Hero labels — animate only, no scroll */
-  labelCupcake.addEventListener('click', () => animateTo('cupcake'));
-  labelPizza.addEventListener('click',   () => animateTo('pizza'));
-  labelBrand.addEventListener('click',   () => animateTo('brand'));
+  /* ── Hero label clicks ── */
+  if (labelCupcake) labelCupcake.addEventListener('click', () => animateTo('cupcake'));
+  if (labelPizza)   labelPizza.addEventListener('click',   () => animateTo('pizza'));
+  if (labelBrand)   labelBrand.addEventListener('click',   () => animateTo('brand'));
 
-  /* ── Mobile nav bar ── */
-const mnavCupcake = document.getElementById('mnav-cupcake');
-const mnavBrand   = document.getElementById('mnav-brand');
-const mnavPizza   = document.getElementById('mnav-pizza');
-const mnavPill    = document.getElementById('mobile-nav-pill');
+  /* ── Mobile nav clicks ── */
+  if (mnavCupcake) mnavCupcake.addEventListener('click', () => animateTo('cupcake'));
+  if (mnavBrand)   mnavBrand.addEventListener('click',   () => animateTo('brand'));
+  if (mnavPizza)   mnavPizza.addEventListener('click',   () => animateTo('pizza'));
 
-function updateMobileNav(s, animate) {
-  const items = {
-    cupcake: mnavCupcake,
-    brand:   mnavBrand,
-    pizza:   mnavPizza
-  };
-  // Update active class
-  Object.entries(items).forEach(([key, el]) => {
-    el.classList.toggle('active', key === s);
-  });
-  // Move pill to active item
-  const activeEl = items[s];
-  if (!activeEl) return;
-  const navRect  = document.getElementById('mobile-nav').getBoundingClientRect();
-  const itemRect = activeEl.getBoundingClientRect();
-  const left     = itemRect.left - navRect.left;
-  const width    = itemRect.width;
-  if (animate) {
-    mnavPill.classList.add('anim');
-  } else {
-    mnavPill.classList.remove('anim');
-  }
-  mnavPill.style.left  = left + 'px';
-  mnavPill.style.width = width + 'px';
-}
-
-mnavCupcake.addEventListener('click', () => animateTo('cupcake'));
-mnavBrand.addEventListener('click',   () => animateTo('brand'));
-mnavPizza.addEventListener('click',   () => animateTo('pizza'));
-
-  /* Crosslink buttons — scroll then animate */
+  /* ── Crosslink and anchor card buttons ── */
   document.querySelectorAll('[data-target]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
@@ -1070,15 +1050,13 @@ mnavPizza.addEventListener('click',   () => animateTo('pizza'));
     });
   });
 
-  /* Logo — scroll then animate to brand */
-  logoBtn.addEventListener('click', () => {
-    scrollThenAnimate('brand');
-  });
+  /* ── Logo ── */
+  if (logoBtn) logoBtn.addEventListener('click', () => scrollThenAnimate('brand'));
 
-  /* Init */
+  /* ── Init ── */
   setPos(50, false);
-  setPills('brand');
   showSection('brand');
+  setTimeout(() => updateMobileNav('brand', false), 50);
 
 })();
 </script>
