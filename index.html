@@ -165,7 +165,7 @@ header {
 /* ─── HERO LABELS ─── */
 .hero-label {
   position: absolute; bottom: 5rem; z-index: 8;
-  color: var(--cream); pointer-events: none;
+  color: var(--cream); pointer-events: auto;
   transition: opacity 0.5s ease;
 }
 .hero-label .sub {
@@ -204,18 +204,16 @@ header {
   font-weight: 700;
   letter-spacing: -0.03em;
 }
-  .hero-label {
-  z-index: 9;
-}
+
 
 /* ─── MOBILE PILL CONTROLS ─── */
 .pills {
   position: absolute; bottom: 1.6rem; left: 0; right: 0;
-  z-index: 20; display: none;
+  z-index: 20; display: none !important;
   align-items: center; justify-content: center;
   height: 76px; pointer-events: none;
 }
-@media (max-width: 767px) { .pills { display: flex; } }
+@media (max-width: 767px) { .pills { display: flex !important; } }
 
 .pill {
   pointer-events: auto; cursor: pointer; border: none;
