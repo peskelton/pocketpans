@@ -113,7 +113,6 @@ header {
 
 /* Pizza sits on the right half conceptually; anchor its subject to the left edge of the right half */
 #layer-pizza { z-index: 1; }
-#layer-pizza img { object-position: right center; }
 #layer-pizza .ph { background: linear-gradient(135deg, #7a2510 0%, #b8452a 40%, #d96045 100%); }
 
 /* Cupcake sits on the left half conceptually; anchor its subject to the right edge of the left half */
@@ -123,7 +122,6 @@ header {
   clip-path: inset(0 50% 0 0);
   will-change: clip-path;
 }
-#layer-cupcake img { object-position: left center; }
 #layer-cupcake .ph { background: linear-gradient(135deg, #dba870 0%, #c48440 50%, #8a5a20 100%); }
 
 #layer-cupcake.anim {
