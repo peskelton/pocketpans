@@ -63,7 +63,7 @@ header {
   position: relative;
   height: 78vh; min-height: 520px; max-height: 800px;
   overflow: hidden; background: var(--ink);
-  cursor: ew-resize;
+  cursor: default;
   /* Prevent text selection while dragging */
   user-select: none; -webkit-user-select: none;
 }
@@ -592,22 +592,22 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 </div>
 
   <!-- Divider line + handle -->
-  <div class="divider" id="divider">
-    <div class="handle">
-      <span class="handle-arrow">‹</span>
-      <span class="handle-arrow">›</span>
-    </div>
+<div class="divider" id="divider">
+  <div class="handle">
+    <span class="handle-arrow">‹</span>
+    <span class="handle-arrow">›</span>
   </div>
+</div>
 
-  <!-- Full-hero invisible drag surface -->
-  <div style="position:absolute;inset:0;z-index:8;" id="drag-surface" aria-hidden="true"></div>
+<!-- Full-hero invisible drag surface -->
+<div style="position:absolute;inset:0;z-index:8;cursor:default;" id="drag-surface" aria-hidden="true"></div>
 
-  <!-- Mobile pills -->
-  <div class="pills">
-    <button class="pill pill-side pill-left" id="pill-left">PocketCakes</button>
-    <button class="pill pill-center active" id="pill-center" aria-label="Both products">P</button>
-    <button class="pill pill-side pill-right" id="pill-right">PocketPies</button>
-  </div>
+<!-- Mobile pills -->
+<div class="pills">
+  <button class="pill pill-side pill-left" id="pill-left">PocketCakes</button>
+  <button class="pill pill-center active" id="pill-center" aria-label="Both products">P</button>
+  <button class="pill pill-side pill-right" id="pill-right">PocketPies</button>
+</div>
 
 </section>
 
@@ -933,29 +933,35 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 
   const isMobile = () => window.innerWidth < 768;
 
-  function onDragStart(e) {
-    if (isMobile()) return;
-    const r = hero.getBoundingClientRect();
-    const clickPct = ((clientX(e) - r.left) / r.width) * 100;
-    if (Math.abs(clickPct - curPct) > 5) return;
-    dragging = true;
-    e.preventDefault();
-    const pct = pctFromEvent(e);
-    setPos(pct, false);
-    applyDragFade(pct);
-  }
-  function onDragMove(e) {
-    if (!dragging) return;
-    const pct = pctFromEvent(e);
-    setPos(pct, false);
-    applyDragFade(pct);
-  }
-  function onDragEnd() {
-    if (!dragging) return;
-    dragging = false;
-    clearFade();
-    resolveSnap(curPct);
-  }
+function onDragStart(e) {
+  if (isMobile()) return;
+  const r = hero.getBoundingClientRect();
+  const clickPct = ((clientX(e) - r.left) / r.width) * 100;
+  if (Math.abs(clickPct - curPct) > 5) return;
+  dragging = true;
+  e.preventDefault();
+  const pct = pctFromEvent(e);
+  setPos(pct, false);
+  applyDragFade(pct);
+}
+function onDragMove(e) {
+  if (!dragging) return;
+  const pct = pctFromEvent(e);
+  setPos(pct, false);
+  applyDragFade(pct);
+}
+function onDragEnd() {
+  if (!dragging) return;
+  dragging = false;
+  clearFade();
+  resolveSnap(curPct);
+}
+dragSurface.addEventListener('mousemove', (e) => {
+  if (isMobile()) return;
+  const r = hero.getBoundingClientRect();
+  const pct = ((e.clientX - r.left) / r.width) * 100;
+  dragSurface.style.cursor = Math.abs(pct - curPct) <= 5 ? 'ew-resize' : 'default';
+});
 
   dragSurface.addEventListener('mousedown',  onDragStart);
   dragSurface.addEventListener('touchstart', onDragStart, { passive: false });
