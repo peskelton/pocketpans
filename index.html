@@ -193,6 +193,17 @@ header {
   .hero-label { bottom: 8rem; }
   .hero-label .name { font-size: 1.4rem; }
 }
+.hero-label.center {
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.hero-label.center .name {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
 
 /* ─── MOBILE PILL CONTROLS ─── */
 .pills {
@@ -567,14 +578,17 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   
 
   <!-- Labels -->
-  <div class="hero-label left" id="label-cupcake">
-    <span class="sub">Standard · Makes 12</span>
-    <span class="name">PocketCakes</span>
-  </div>
-  <div class="hero-label right" id="label-pizza">
-    <span class="sub">Personal · Makes 9</span>
-    <span class="name">PocketPies</span>
-  </div>
+<div class="hero-label left" id="label-cupcake">
+  <span class="sub">Standard · Makes 12</span>
+  <span class="name">PocketCakes</span>
+</div>
+<div class="hero-label center" id="label-brand">
+  <span class="name">PocketPans</span>
+</div>
+<div class="hero-label right" id="label-pizza">
+  <span class="sub">Personal · Makes 9</span>
+  <span class="name">PocketPies</span>
+</div>
 
   <!-- Divider line + handle -->
   <div class="divider" id="divider">
@@ -770,20 +784,21 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 (function () {
   'use strict';
 
-  const hero        = document.getElementById('hero');
-  const dragSurface = document.getElementById('drag-surface');
-  const dividerEl   = document.getElementById('divider');
-  const cupcakeL    = document.getElementById('layer-cupcake');
-  const underline   = document.getElementById('hero-underline');
-  const brandSec    = document.getElementById('brand-section');
-  const cupcakeSec  = document.getElementById('cupcake-section');
-  const pizzaSec    = document.getElementById('pizza-section');
-  const pillLeft    = document.getElementById('pill-left');
-  const pillRight   = document.getElementById('pill-right');
-  const pillCenter  = document.getElementById('pill-center');
-  const logoBtn     = document.getElementById('logo-home');
+  const hero         = document.getElementById('hero');
+  const dragSurface  = document.getElementById('drag-surface');
+  const dividerEl    = document.getElementById('divider');
+  const cupcakeL     = document.getElementById('layer-cupcake');
+  const underline    = document.getElementById('hero-underline');
+  const brandSec     = document.getElementById('brand-section');
+  const cupcakeSec   = document.getElementById('cupcake-section');
+  const pizzaSec     = document.getElementById('pizza-section');
+  const pillLeft     = document.getElementById('pill-left');
+  const pillRight    = document.getElementById('pill-right');
+  const pillCenter   = document.getElementById('pill-center');
+  const logoBtn      = document.getElementById('logo-home');
   const labelCupcake = document.getElementById('label-cupcake');
   const labelPizza   = document.getElementById('label-pizza');
+  const labelBrand   = document.getElementById('label-brand');
 
   let state    = 'brand';
   let dragging = false;
@@ -791,41 +806,25 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   const THRESH  = 20;
   const ANIM_MS = 1200;
 
-  /* ── Underline anchor positions (% of hero width) ──
-     Left label sits at ~6% from left edge, right label at ~6% from right.
-     We anchor to the center of each label's first character.
-     Underline is 28px wide so we offset by 14px to center it.
-     These are expressed as % for responsive behavior.            */
   function getUnderlineLeft(divPct) {
-    // Map divider 0–100% to underline travel between right-label and left-label
-    // Right label (pizza)  → divider 0%   → underline at ~88% of hero width
-    // Center (brand)       → divider 50%  → underline at 50% (centered)
-    // Left label (cupcake) → divider 100% → underline at ~6% of hero width
-    // Linear interpolation between these three anchor points
-    const heroW = hero.offsetWidth;
-    const pxRight  = heroW * 0.88; // pizza label approx center-x
+    const heroW    = hero.offsetWidth;
+    const pxRight  = heroW * 0.88;
     const pxCenter = heroW * 0.50;
-    const pxLeft   = heroW * 0.06; // cupcake label approx center-x
-
+    const pxLeft   = heroW * 0.06;
     let px;
     if (divPct <= 50) {
-      // interpolate between right and center
       const t = divPct / 50;
       px = pxRight + (pxCenter - pxRight) * t;
     } else {
-      // interpolate between center and left
       const t = (divPct - 50) / 50;
       px = pxCenter + (pxLeft - pxCenter) * t;
     }
-    return (px - 84) + 'px'; // center the 28px underline
+    return (px - 84) + 'px';
   }
 
   function setUnderline(divPct, animate) {
-    if (animate) {
-      underline.classList.add('anim');
-    } else {
-      underline.classList.remove('anim');
-    }
+    if (animate) underline.classList.add('anim');
+    else underline.classList.remove('anim');
     underline.style.left = getUnderlineLeft(divPct);
   }
 
@@ -861,7 +860,11 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     return 50;
   }
 
-  function transitionTo(newState, scrollUp) {
+  /* 
+    Animate only — no scrolling.
+    Used by hero label clicks and pill clicks.
+  */
+  function animateTo(newState) {
     if (newState === state) {
       setPos(targetPct(state), true);
       return;
@@ -872,13 +875,29 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     setTimeout(() => {
       state = newState;
       showSection(state);
-      if (scrollUp !== false) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => {
-          window.scrollTo({ top: hero.offsetHeight - 80, behavior: 'smooth' });
-        }, 700);
-      }
     }, ANIM_MS + 50);
+  }
+
+  /*
+    Scroll to top first, then animate.
+    Used by crosslink buttons at bottom of product sections.
+  */
+  function scrollThenAnimate(newState) {
+    // Swap content immediately so it's ready when user arrives at top
+    if (newState !== state) {
+      showSection(null);
+      setPills(newState);
+    }
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // After scroll settles, animate the divider
+    setTimeout(() => {
+      setPos(targetPct(newState), true);
+      setTimeout(() => {
+        state = newState;
+        showSection(state);
+      }, ANIM_MS + 50);
+    }, 600);
   }
 
   function resolveSnap(pct) {
@@ -886,7 +905,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     if (pct < 50 - THRESH)      snapState = 'pizza';
     else if (pct > 50 + THRESH) snapState = 'cupcake';
     else                         snapState = 'brand';
-    transitionTo(snapState, false);
+    animateTo(snapState);
   }
 
   function applyDragFade(pct) {
@@ -911,12 +930,10 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     return ((clientX(e) - r.left) / r.width) * 100;
   }
 
-  /* ── Drag — desktop only ── */
   const isMobile = () => window.innerWidth < 768;
 
   function onDragStart(e) {
     if (isMobile()) return;
-    // Only start drag if mousedown is on the divider handle area (within 30px)
     const r = hero.getBoundingClientRect();
     const clickPct = ((clientX(e) - r.left) / r.width) * 100;
     if (Math.abs(clickPct - curPct) > 5) return;
@@ -947,30 +964,30 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   document.addEventListener('touchend',   onDragEnd);
   document.addEventListener('touchcancel',onDragEnd);
 
-  /* ── Pills (mobile) ── */
-  pillLeft.addEventListener('click',   () => transitionTo('cupcake'));
-  pillRight.addEventListener('click',  () => transitionTo('pizza'));
-  pillCenter.addEventListener('click', () => transitionTo('brand'));
+  /* Hero labels — animate only, no scroll */
+  labelCupcake.addEventListener('click', () => animateTo('cupcake'));
+  labelPizza.addEventListener('click',   () => animateTo('pizza'));
+  labelBrand.addEventListener('click',   () => animateTo('brand'));
 
-  /* ── Clickable labels (both viewports) ── */
-  labelCupcake.addEventListener('click', () => transitionTo('cupcake'));
-  labelPizza.addEventListener('click',   () => transitionTo('pizza'));
+  /* Pills — animate only, no scroll */
+  pillLeft.addEventListener('click',   () => animateTo('cupcake'));
+  pillRight.addEventListener('click',  () => animateTo('pizza'));
+  pillCenter.addEventListener('click', () => animateTo('brand'));
 
-  /* ── Anchor links ── */
+  /* Crosslink buttons — scroll then animate */
   document.querySelectorAll('[data-target]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
-      transitionTo(el.getAttribute('data-target'));
+      scrollThenAnimate(el.getAttribute('data-target'));
     });
   });
 
-  /* ── Logo ── */
+  /* Logo — scroll then animate to brand */
   logoBtn.addEventListener('click', () => {
-    if (state === 'brand') window.scrollTo({ top: 0, behavior: 'smooth' });
-    else transitionTo('brand');
+    scrollThenAnimate('brand');
   });
 
-  /* ── Init ── */
+  /* Init */
   setPos(50, false);
   setPills('brand');
   showSection('brand');
