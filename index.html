@@ -204,6 +204,9 @@ header {
   font-weight: 700;
   letter-spacing: -0.03em;
 }
+  .hero-label {
+  z-index: 9;
+}
 
 /* ─── MOBILE PILL CONTROLS ─── */
 .pills {
@@ -599,7 +602,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   </div>
 
   <!-- Full-hero invisible drag surface -->
-  <div style="position:absolute;inset:0;z-index:15;" id="drag-surface" aria-hidden="true"></div>
+  <div style="position:absolute;inset:0;z-index:8;" id="drag-surface" aria-hidden="true"></div>
 
   <!-- Mobile pills -->
   <div class="pills">
@@ -674,7 +677,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   <div class="variant-anchors">
     <div class="va-header"><h2 class="serif">Choose your <em>pocket.</em></h2></div>
     <div class="anchor-row">
-      <a class="anchor-card" data-target="cupcake" href="#" aria-label="Explore PocketCakes">
+      <a class="anchor-card" data-target="cupcake" href="javascript:void(0)">
         <div class="thumb">
           <div class="ph ph-anchor-cake"><span>PocketCakes angle shot</span></div>
         </div>
@@ -683,7 +686,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
         <p class="desc">Three pans, twelve cavities, twelve matching inserts. The fillable bakeware system for cupcakes, muffins, and mini desserts.</p>
         <span class="arrow-lnk">Explore PocketCakes</span>
       </a>
-      <a class="anchor-card" data-target="pizza" href="#" aria-label="Explore PocketPies">
+      <a class="anchor-card" data-target="pizza" href="javascript:void(0)">
         <div class="thumb">
           <div class="ph ph-anchor-pie"><span>PocketPies angle shot</span></div>
         </div>
@@ -727,8 +730,8 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
       <h3 class="serif">Going savory?</h3>
       <p>PocketPies brings the same fillable system to personal deep-dish pizzas, pot pies, and hand pies.</p>
       <div class="xlinks">
-        <a class="lbtn primary" data-target="pizza" href="#">See PocketPies →</a>
-        <a class="lbtn" data-target="brand" href="#">Back to overview</a>
+        <a class="lbtn primary" data-target="pizza" href="javascript:void(0)" →</a>
+        <a class="lbtn" data-target="brand" href="javascript:void(0)"</a>
       </div>
     </div>
   </div>
@@ -764,8 +767,8 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
       <h3 class="serif">Sweet on the brain?</h3>
       <p>PocketCakes brings the same fillable system to standard cupcakes and muffins — cream-filled, jam-filled, custard-filled.</p>
       <div class="xlinks">
-        <a class="lbtn primary" data-target="cupcake" href="#">See PocketCakes →</a>
-        <a class="lbtn" data-target="brand" href="#">Back to overview</a>
+        <a class="lbtn primary" data-target="cupcake" href="javascript:void(0)" →</a>
+        <a class="lbtn" data-target="brand" href="javascript:void(0)"</a>
       </div>
     </div>
   </div>
