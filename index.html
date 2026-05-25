@@ -107,9 +107,11 @@ header {
   transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1);
 }
 @media (max-width: 767px) {
-  .hero-label { display: none; }
-  .hero-underline { display: none; }
-}
+  .hero {
+    height: 52dvh;
+    min-height: 180px;
+    max-height: 260px;
+  }
 
 /* Pizza sits on the right half conceptually; anchor its subject to the left edge of the right half */
 #layer-pizza { z-index: 1; }
