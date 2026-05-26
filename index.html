@@ -593,18 +593,42 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 .mobile-nav-item.active {
   color: white;
 }
-  .product-video {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--ink);
+
+  /* ─── VIDEO HOLE SECTION ─── */
+.video-hole-section {
+  background: var(--terracotta);
+  padding: 4rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.product-video video {
+.video-hole {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1 / 1;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 8px 32px rgba(0,0,0,0.45),
+    inset 0 2px 8px rgba(0,0,0,0.3),
+    inset 0 -4px 16px rgba(0,0,0,0.2);
+  position: relative;
+}
+.video-hole video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
+}
+@media (max-width: 767px) {
+  .video-hole {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+  .video-hole-section {
+    padding: 2rem 1.2rem;
+  }
 }
 </style>
 </head>
@@ -775,10 +799,12 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     <div class="price-row"><span class="price">$19.88</span><span class="price-note">Launch Price</span></div>
     <a class="buy-cta" href="https://www.amazon.com/dp/B0H24Z696P" target="_blank" rel="noopener">Buy on Amazon</a>
   </div>
-  <div class="product-video">
-  <video autoplay muted loop playsinline>
-    <source src="videos/PocketCakes_Filled.mp4" type="video/mp4">
-  </video>
+  <div class="video-hole-section">
+  <div class="video-hole">
+    <video autoplay muted loop playsinline>
+      <source src="videos/PocketCakes_Filled.mp4" type="video/mp4">
+    </video>
+  </div>
 </div>
   <div class="product-visual">
     <div class="frame">
@@ -817,10 +843,12 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     <div class="price-row"><span class="price">$26.88</span><span class="price-note">Launch Price</span></div>
     <a class="buy-cta" href="https://www.amazon.com/dp/B0GPR6FM7M" target="_blank" rel="noopener">Buy on Amazon</a>
   </div>
-  <div class="product-video">
-  <video autoplay muted loop playsinline>
-    <source src="videos/PocketPies_Cheese.mp4" type="video/mp4">
-  </video>
+  <div class="video-hole-section">
+  <div class="video-hole">
+    <video autoplay muted loop playsinline>
+      <source src="videos/PocketPies_Cheese.mp4" type="video/mp4">
+    </video>
+  </div>
 </div>
   <div class="product-visual">
     <div class="frame">
