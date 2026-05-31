@@ -198,9 +198,14 @@ header {
   .hero-label .name { font-size: 1.4rem; }
 }
 .hero-label.center {
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+  margin-top: -90px; /* pulls it up over the hero edge */
+  z-index: 50;
+  width: fit-content;
+  bottom: auto;
 }
 .hero-label.center .name {
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -630,6 +635,11 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   display: block;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
 }
+  @media (max-width: 767px) {
+  .hero-label.center {
+    display: none;
+  }
+}
 }
 </style>
 </head>
@@ -673,9 +683,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   <span class="sub">Standard · Makes 12</span>
   <span class="name">PocketCakes</span>
 </div>
-<div class="hero-label center" id="label-brand">
-  <img src="images/PocketPans_Logo.png" alt="PocketPans" class="hero-logo-img">
-</div>
+
 <div class="hero-label right" id="label-pizza">
   <span class="sub">Personal · Makes 9</span>
   <span class="name">PocketPies</span>
@@ -693,6 +701,10 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 <div style="position:absolute;inset:0;z-index:8;cursor:default;" id="drag-surface" aria-hidden="true"></div>
 
 </section>
+  
+<div class="hero-label center" id="label-brand">
+  <img src="images/PocketPans_Logo.png" alt="PocketPans" class="hero-logo-img">
+</div>
   
 <!-- Mobile nav bar -->
 <div class="mobile-nav" id="mobile-nav">
