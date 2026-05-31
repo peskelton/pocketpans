@@ -304,7 +304,63 @@ header {
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   color: var(--ink-soft); max-width: 620px; margin: 0 auto;
 }
-
+/* ─── VIDEO CARDS ─── */
+.video-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 5%;
+  background: var(--cream);
+}
+@media (max-width: 767px) {
+  .video-cards {
+    grid-template-columns: 1fr;
+    padding: 3rem 5%;
+    gap: 2.5rem;
+  }
+}
+.video-card {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--cream);
+  box-shadow: 0 8px 40px -8px rgba(0,0,0,0.15);
+}
+.video-card-media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+  position: relative;
+}
+.video-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+.video-card-footer {
+  padding: 1.4rem 1.6rem 1.6rem;
+  background: var(--cream);
+  border-radius: 0 0 24px 24px;
+}
+.video-card-name {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  color: var(--terracotta);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.video-card-copy {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
 /* ─── CONCEPT ─── */
 .concept { background: var(--cream-deep); padding: 7rem 5%; }
 .concept-grid {
@@ -762,7 +818,31 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     <h1 class="serif">One pan, <em>two sizes,</em><br>endless fillable creations.</h1>
     <p class="lead">A baking system designed around the moment everyone loves most — the surprise inside. Cream-filled cupcakes. Deep-dish pizza with a pocket of sauce and cheese. Pot pies, hand pies, and everything in between.</p>
   </div>
+<div class="video-cards">
+  <div class="video-card">
+    <div class="video-card-media">
+      <video autoplay muted loop playsinline>
+        <source src="videos/PocketCakes_Filled.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-card-footer">
+      <span class="video-card-name">PocketCakes</span>
+      <p class="video-card-copy">Fill it with anything. Cream, custard, jam, ganache.</p>
+    </div>
+  </div>
 
+  <div class="video-card">
+    <div class="video-card-media">
+      <video autoplay muted loop playsinline>
+        <source src="videos/PocketPies_Cheese.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-card-footer">
+      <span class="video-card-name">PocketPies</span>
+      <p class="video-card-copy">Deep dish personal pizzas. Every pocket, every time.</p>
+    </div>
+  </div>
+</div>
   <div class="concept">
     <div class="concept-grid">
       <div class="concept-visual">
