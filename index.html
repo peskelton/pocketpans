@@ -560,10 +560,11 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   display: none;
   position: relative;
   background: white;
-  padding: 0.6rem 1rem;
+  padding: 0.4rem 1rem;
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid var(--line);
+  overflow: visible;
 }
 @media (max-width: 767px) {
   .mobile-nav { display: flex; }
@@ -581,6 +582,11 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 .mobile-nav-pill.anim {
   transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1),
               width 0.95s cubic-bezier(0.65, 0, 0.35, 1);
+}
+  .mobile-nav-pill {
+  transition: left 0.95s cubic-bezier(0.65, 0, 0.35, 1),
+              width 0.95s cubic-bezier(0.65, 0, 0.35, 1),
+              opacity 0.3s ease;
 }
 .mobile-nav-item {
   position: relative;
@@ -600,6 +606,22 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 }
 .mobile-nav-item.active {
   color: var(--terracotta);
+}
+  .mnav-logo-btn {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: -40px;
+}
+.mnav-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
 }
   .product-video {
   width: 100%;
@@ -714,7 +736,9 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 <div class="mobile-nav" id="mobile-nav">
   <div class="mobile-nav-pill" id="mobile-nav-pill"></div>
   <button class="mobile-nav-item" id="mnav-cupcake">PocketCakes</button>
-  <button class="mobile-nav-item" id="mnav-brand">PocketPans</button>
+  <button class="mnav-logo-btn" id="mnav-brand" aria-label="PocketPans">
+  <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="mnav-logo-img">
+</button>
   <button class="mobile-nav-item" id="mnav-pizza">PocketPies</button>
 </div>
 
@@ -980,20 +1004,27 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 
   /* ── Mobile nav ── */
   function updateMobileNav(s, animate) {
-    const items = { cupcake: mnavCupcake, brand: mnavBrand, pizza: mnavPizza };
-    Object.entries(items).forEach(([key, el]) => {
-      if (el) el.classList.toggle('active', key === s);
-    });
-    const activeEl = items[s];
-    const navEl = document.getElementById('mobile-nav');
-    if (!activeEl || !navEl) return;
-    const navRect  = navEl.getBoundingClientRect();
-    const itemRect = activeEl.getBoundingClientRect();
-    if (animate) mnavPill.classList.add('anim');
-    else mnavPill.classList.remove('anim');
-    mnavPill.style.left  = (itemRect.left - navRect.left) + 'px';
-    mnavPill.style.width = itemRect.width + 'px';
+  const items = { cupcake: mnavCupcake, brand: mnavBrand, pizza: mnavPizza };
+  Object.entries(items).forEach(([key, el]) => {
+    if (el) el.classList.toggle('active', key === s);
+  });
+
+  if (s === 'brand') {
+    mnavPill.style.opacity = '0';
+  } else {
+    mnavPill.style.opacity = '1';
   }
+
+  const activeEl = items[s];
+  const navEl = document.getElementById('mobile-nav');
+  if (!activeEl || !navEl) return;
+  const navRect  = navEl.getBoundingClientRect();
+  const itemRect = activeEl.getBoundingClientRect();
+  if (animate) mnavPill.classList.add('anim');
+  else mnavPill.classList.remove('anim');
+  mnavPill.style.left  = (itemRect.left - navRect.left) + 'px';
+  mnavPill.style.width = itemRect.width + 'px';
+}
 
   /* ── Target divider percent per state ── */
   function targetPct(s) {
