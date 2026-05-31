@@ -53,8 +53,13 @@ header {
   display: flex; align-items: baseline; gap: 0.15rem;
 }
 .nav-meta {
-  font-size: 0.72rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--warm-gray); font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  color: var(--warm-gray);
+  font-weight: 300;
   text-align: right;
 }
 /* ─── HERO ─── */
@@ -565,11 +570,10 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 }
 .mobile-nav-pill {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: calc(100% - 0.8rem);
+  bottom: 0;
+  height: 3px;
   background: var(--terracotta);
-  border-radius: 999px;
+  border-radius: 2px;
   z-index: 0;
   pointer-events: none;
   will-change: left, width;
@@ -584,18 +588,18 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   background: none;
   border: none;
   font-family: 'Fraunces', serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-style: italic;
+  font-size: 0.95rem;
+  font-weight: 400;
   color: var(--ink);
-  padding: 0.5rem 0.8rem;
+  padding: 0.6rem 0.8rem;
   cursor: pointer;
   transition: color 0.3s;
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
 }
 .mobile-nav-item.active {
-  color: white;
+  color: var(--terracotta);
 }
   .product-video {
   width: 100%;
