@@ -785,7 +785,7 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   min-height: 200px;
   border: 2px solid red;
 }
-  .concept-cards {
+.concept-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -796,18 +796,12 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   width: 100%;
   box-sizing: border-box;
 }
-  .concept-cards-wrap {
+.concept-cards-wrap {
   background: var(--cream-deep);
   width: 100%;
 }
-@media (max-width: 767px) {
-  .concept-cards {
-    grid-template-columns: 1fr;
-    padding: 3rem 5%;
-    gap: 2.5rem;
-  }
-  .concept-cards .video-card-media {
-  aspect-ratio: 5/4;
+.concept-cards .video-card-media {
+  aspect-ratio: 5 / 4;
   height: auto;
 }
 .concept-cards .video-card-media img {
@@ -816,6 +810,13 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   object-fit: contain;
   object-position: center center;
   display: block;
+}
+@media (max-width: 767px) {
+  .concept-cards {
+    grid-template-columns: 1fr;
+    padding: 3rem 5%;
+    gap: 2.5rem;
+  }
 }
 }
 </style>
