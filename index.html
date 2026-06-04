@@ -62,6 +62,29 @@ header {
   font-weight: 300;
   text-align: right;
 }
+  .nav-cta {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--terracotta);
+  text-decoration: none;
+  border: 1px solid var(--terracotta);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--terracotta);
+  color: var(--cream);
+}
+@media (max-width: 767px) {
+  .nav-cta {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
+  }
+}
 /* ─── HERO ─── */
 .hero {
   position: relative;
@@ -850,12 +873,12 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
 <body>
 
 <header>
-  <div class="nav">
-    <button class="logo" id="logo-home" aria-label="PocketPans home">
-  <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="logo-img">
+ <div class="nav">
+  <button class="logo" id="logo-home" aria-label="PocketPans home">
+    <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="logo-img">
   </button>
-    <div class="nav-meta">Pocket-forming Bakeware</div>
-  </div>
+  <a class="nav-cta" href="https://www.amazon.com/dp/B0H28JRGD4" target="_blank" rel="noopener">Buy on Amazon</a>
+</div>
 </header>
 
 <!-- ═══ HERO ═══ -->
