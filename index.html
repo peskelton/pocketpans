@@ -784,38 +784,64 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
   #pizza-section.active {
   min-height: 200px;
   border: 2px solid red;
-}
-.concept-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 5rem 5%;
-  background: var(--cream-deep);
+    /* ─── ACTION SECTIONS ─── */
+.action-section {
+  position: relative;
   width: 100%;
-  box-sizing: border-box;
+  height: 70vh;
+  min-height: 400px;
+  max-height: 700px;
+  overflow: hidden;
 }
-.concept-cards-wrap {
-  background: var(--cream-deep);
-  width: 100%;
-}
-.concept-cards .video-card-media {
-  aspect-ratio: 5 / 4;
-  height: auto;
-}
-.concept-cards .video-card-media img {
+.action-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
 }
+.action-pill {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  max-width: 420px;
+  background: rgba(26, 20, 16, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+.action-pill p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: var(--cream);
+  line-height: 1.5;
+  margin: 0;
+}
 @media (max-width: 767px) {
-  .concept-cards {
-    grid-template-columns: 1fr;
-    padding: 3rem 5%;
-    gap: 2.5rem;
+  .action-section {
+    height: 45vh;
+    min-height: 260px;
+    max-height: 380px;
+  }
+  .action-pill {
+    position: relative;
+    top: auto;
+    left: auto;
+    max-width: 100%;
+    border-radius: 0;
+    background: var(--cream-deep);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    padding: 1.4rem 5%;
+  }
+  .action-pill p {
+    color: var(--ink);
+    font-size: 1rem;
   }
 }
 }
@@ -932,13 +958,19 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     </div>
   </div>
 </div>
+<div class="action-section">
+  <img src="images/Brand_Concept_Action.jpg" alt="PocketCakes insert being pressed into batter" class="action-bg">
+  <div class="action-pill">
+    <p>No coring. No cutting. Press the insert into your batter and the pocket forms itself.</p>
+  </div>
+</div>
 
-<div class="concept-cards-wrap">
-  <div class="concept-cards">
-    <div class="video-card">
-      <div class="video-card-media">
-        <img src="images/Brand_Concept_Action.jpg" alt="PocketCakes insert being pressed into batter">
-      </div>
+<div class="action-section">
+  <img src="images/Brand_Concept_Action_Pies.jpg" alt="PocketPies insert being pressed into dough" class="action-bg">
+  <div class="action-pill">
+    <p>Push the insert into your dough. Pull it out after baking. Deep dish pocket, every time.</p>
+  </div>
+</div>
       <div class="video-card-footer">
         <span class="video-card-name">PocketCakes</span>
         <p class="video-card-copy">Snap the insert into your batter. Pull it out after baking. Fill it with anything.</p>
