@@ -533,15 +533,17 @@ header {
   font-weight: 500; font-size: 1.3rem; color: var(--terracotta);
   margin-bottom: 1.6rem; text-align: center;
 }
-.recipe-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-}
-@media (max-width: 900px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .recipe-grid { grid-template-columns: 1fr; } }
 .recipe-card {
-  background: var(--cream-deep); padding: 2rem 1.6rem;
+  background: var(--cream-deep); overflow: hidden;
   border-radius: 4px; border-top: 3px solid var(--terracotta);
 }
+.recipe-card-image {
+  width: 100%; aspect-ratio: 1 / 1; overflow: hidden;
+}
+.recipe-card-image img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.recipe-card-body { padding: 1.6rem 1.4rem; }
 .recipe-card h4 {
   font-family: 'Fraunces', serif; font-weight: 500;
   font-size: 1.1rem; margin-bottom: 0.9rem; letter-spacing: -0.01em;
@@ -1093,37 +1095,57 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     <div class="recipe-group-label">PocketCakes</div>
     <div class="recipe-grid">
       <div class="recipe-card">
-        <h4 class="serif">Classic Filled Cupcake</h4>
-        <ol>
-          <li>Fill cavities 2/3 full with your favorite batter.</li>
-          <li>Press insert down until batter reaches just below the rim.</li>
-          <li>Bake per your batter's standard time and temp.</li>
-          <li>Remove insert while warm. Fill pocket with jam, pudding, or frosting.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Chocolate_Buttercream.jpg" alt="Classic filled chocolate cupcake with vanilla buttercream">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Classic Filled Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with chocolate cake batter.</li>
+            <li>Press insert down until batter reaches just below the rim.</li>
+            <li>Bake per your batter's standard time and temp.</li>
+            <li>Remove insert while warm. Fill pocket with vanilla buttercream.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">Mini Coffee Cake with Fruit Filling</h4>
-        <ol>
-          <li>Fill cavities 2/3 full with coffee cake batter, adding crumb topping around the insert rim.</li>
-          <li>Press insert in and bake as directed.</li>
-          <li>Remove while warm, fill with pie filling.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Coffee_Cake.jpg" alt="Mini coffee cake with fruit filling">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Mini Coffee Cake with Fruit Filling</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with coffee cake batter, adding crumb topping around the insert rim.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with pie filling.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">S'mores Cupcake</h4>
-        <ol>
-          <li>Fill cavities 2/3 full with chocolate cake batter.</li>
-          <li>Press insert in and bake as directed.</li>
-          <li>Remove while warm, fill with mini marshmallows and a chocolate drizzle. Broil briefly to toast.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipes_Smores.jpg" alt="S'mores filled chocolate cupcake">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">S'mores Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with chocolate cake batter.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with mini marshmallows and a chocolate drizzle. Broil briefly to toast.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">PB&J Cupcake</h4>
-        <ol>
-          <li>Fill cavities 2/3 full with yellow cake batter.</li>
-          <li>Press insert in and bake as directed.</li>
-          <li>Remove while warm, fill with a peanut butter and jelly swirl.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_PBnJ.jpg" alt="PB&J filled cupcake">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">PB&J Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with yellow cake batter.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with a peanut butter and jelly swirl.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
@@ -1132,46 +1154,66 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
     <div class="recipe-group-label">PocketPies</div>
     <div class="recipe-grid">
       <div class="recipe-card">
-        <h4 class="serif">Personal Deep-Dish Pizza</h4>
-        <ol>
-          <li>Press pizza dough into the cavity, about 3/4 up the sidewall.</li>
-          <li>Press insert in firmly to form the pocket.</li>
-          <li>Bake until the crust is set and golden.</li>
-          <li>Remove insert while warm, add sauce, cheese, and toppings.</li>
-          <li>Return to the oven and bake until cheese is melted and toppings are cooked through.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Pepperoni_Pie.jpg" alt="Personal deep-dish pepperoni pizza">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Personal Deep-Dish Pizza</h4>
+          <ol>
+            <li>Press pizza dough into the cavity, about 3/4 up the sidewall.</li>
+            <li>Press insert in firmly to form the pocket.</li>
+            <li>Bake until the crust is set and golden.</li>
+            <li>Remove insert while warm, add sauce, cheese, and toppings.</li>
+            <li>Return to the oven and bake until cheese is melted and toppings are cooked through.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">Chili Cornbread Cups</h4>
-        <ol>
-          <li>Fill cavities 3/4 full with cornbread batter.</li>
-          <li>Press insert in until batter nearly reaches the rim.</li>
-          <li>Bake per your cornbread recipe's time and temp.</li>
-          <li>Remove insert while warm, fill with chili.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Chili_Cornbread.jpg" alt="Chili cornbread cups">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Chili Cornbread Cups</h4>
+          <ol>
+            <li>Fill cavities 3/4 full with cornbread batter.</li>
+            <li>Press insert in until batter nearly reaches the rim.</li>
+            <li>Bake per your cornbread recipe's time and temp.</li>
+            <li>Remove insert while warm, fill with chili.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">Mini Chicken Pot Pie</h4>
-        <ol>
-          <li>Press pie or biscuit dough into the cavity, up the sidewall.</li>
-          <li>Press insert in to form the pocket.</li>
-          <li>Pre-bake crust 5-7 minutes, then remove insert.</li>
-          <li>Fill with pre-cooked pot pie filling, top with a small dough round, and finish baking until golden.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_PotPie.jpg" alt="Mini chicken pot pie">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Mini Chicken Pot Pie</h4>
+          <ol>
+            <li>Press pie or biscuit dough into the cavity, up the sidewall.</li>
+            <li>Press insert in to form the pocket.</li>
+            <li>Pre-bake crust 5-7 minutes, then remove insert.</li>
+            <li>Fill with pre-cooked pot pie filling, top with a small dough round, and finish baking until golden.</li>
+          </ol>
+        </div>
       </div>
       <div class="recipe-card">
-        <h4 class="serif">Personal Bread Bowl</h4>
-        <ol>
-          <li>Press bread or pizza dough into the cavity, about 1/2" thick up the sidewall.</li>
-          <li>Press insert in firmly.</li>
-          <li>Bake until golden and set.</li>
-          <li>Remove insert while warm. Fill with soup just before serving.</li>
-        </ol>
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Bread_Bowl.jpg" alt="Personal bread bowl with soup">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Personal Bread Bowl</h4>
+          <ol>
+            <li>Press bread or pizza dough into the cavity, about 1/2" thick up the sidewall.</li>
+            <li>Press insert in firmly.</li>
+            <li>Bake until golden and set.</li>
+            <li>Remove insert while warm. Fill with soup just before serving.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div><!-- /brand-section -->
+<!-- /brand-section -->
 
 <!-- POCKETCAKES -->
 <div class="section" id="cupcake-section">
