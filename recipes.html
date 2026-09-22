@@ -6,82 +6,18 @@
 <title>Recipes & Inspiration — PocketPans</title>
 <meta name="description" content="Recipes and ideas for PocketCakes and PocketPies — fillable silicone bakeware for cupcakes, muffins, personal pizzas, and more.">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XC9ZCYYC71"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-696TPMB8MQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XC9ZCYYC71');
+  gtag('config', 'G-696TPMB8MQ');
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,300;9..144,1,400;9..144,1,500;9..144,1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
-:root {
-  --cream: #faf5ee;
-  --cream-deep: #f0e8d5;
-  --terracotta: #c2553e;
-  --terracotta-deep: #8e3a28;
-  --ink: #1a1410;
-  --ink-soft: #4a3f36;
-  --warm-gray: #8a7a6c;
-  --line: #d9cdb8;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  color: var(--ink);
-  background: var(--cream);
-}
-.serif { font-family: 'Fraunces', Georgia, serif; }
-
-header {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(250,245,238,0.93);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
-}
-.nav {
-  max-width: 1400px; margin: 0 auto;
-  padding: 1.1rem 5%;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 1.5rem;
-}
-.logo-img { height: 44px; width: auto; display: block; }
-@media (max-width: 767px) { .logo-img { height: 32px; } }
-.logo {
-  background: none; border: none; cursor: pointer; padding: 0;
-}
-.nav-links {
-  display: flex; align-items: center; gap: 1.5rem;
-  font-family: 'Fraunces', serif; font-style: italic; font-size: 0.95rem;
-}
-.nav-links a {
-  color: var(--ink); text-decoration: none;
-  transition: color 0.3s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
-.nav-cta {
-  font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
-  font-size: 0.9rem; color: var(--terracotta); text-decoration: none;
-  border: 1px solid var(--terracotta); border-radius: 999px;
-  padding: 0.5rem 1.2rem; transition: background 0.3s, color 0.3s;
-  white-space: nowrap;
-}
-.nav-cta:hover { background: var(--terracotta); color: var(--cream); }
-@media (max-width: 767px) {
-  .nav-cta { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
-  .nav-links { gap: 1rem; font-size: 0.85rem; }
-}
-
-.eyebrow {
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--terracotta); margin-bottom: 1.3rem; display: block;
-}
-
 .product-hero {
   padding: 5rem 5% 3.5rem; text-align: center;
   background: var(--cream);
@@ -129,11 +65,6 @@ header {
 }
 .recipe-card li { margin-bottom: 0.4rem; }
 .recipe-card li:last-child { margin-bottom: 0; }
-
-footer { background: var(--ink); color: var(--cream); padding: 3rem 5%; text-align: center; }
-footer .fi { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
-footer .fb { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; color: var(--terracotta); }
-footer .fm { font-size: 0.83rem; opacity: 0.55; }
 </style>
 </head>
 <body>
@@ -144,7 +75,8 @@ footer .fm { font-size: 0.83rem; opacity: 0.55; }
       <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="logo-img">
     </button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html#cupcake">PocketCakes</a>
+      <a href="index.html#pizza">PocketPies</a>
       <a href="recipes.html" class="active">Recipes</a>
     </div>
     <a class="nav-cta" href="https://www.amazon.com/dp/B0H28JRGD4" target="_blank" rel="noopener">Buy on Amazon</a>
