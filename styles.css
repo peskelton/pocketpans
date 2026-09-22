@@ -49,10 +49,6 @@ header {
   white-space: nowrap;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
-@media (max-width: 767px) {
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
-}
 
 .nav-cta {
   font-family: 'Fraunces', serif;
@@ -68,7 +64,19 @@ header {
   white-space: nowrap;
 }
 .nav-cta:hover { background: var(--terracotta); color: var(--cream); }
+
 @media (max-width: 767px) {
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+  .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
   .nav-cta { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
 }
 
