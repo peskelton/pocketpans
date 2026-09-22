@@ -1,0 +1,87 @@
+:root {
+  --cream: #faf5ee;
+  --cream-deep: #f0e8d5;
+  --terracotta: #c2553e;
+  --terracotta-deep: #8e3a28;
+  --ink: #1a1410;
+  --ink-soft: #4a3f36;
+  --warm-gray: #8a7a6c;
+  --line: #d9cdb8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+
+/* ─── HEADER / NAV ─── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(250,245,238,0.93);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1400px; margin: 0 auto;
+  padding: 1.1rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1.5rem;
+}
+.logo {
+  background: none; border: none; cursor: pointer; padding: 0;
+  display: flex; align-items: baseline; gap: 0.15rem;
+}
+.logo-img { height: 44px; width: auto; display: block; }
+@media (max-width: 767px) { .logo-img { height: 32px; } }
+
+.nav-links {
+  display: flex; align-items: center; gap: 1.8rem;
+}
+.nav-links a {
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+@media (max-width: 767px) {
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
+}
+
+.nav-cta {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--terracotta);
+  text-decoration: none;
+  border: 1px solid var(--terracotta);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--terracotta); color: var(--cream); }
+@media (max-width: 767px) {
+  .nav-cta { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
+}
+
+/* ─── SHARED HELPERS ─── */
+.eyebrow {
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: 1.3rem; display: block;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--ink); color: var(--cream); padding: 3rem 5%; text-align: center; }
+footer .fi { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
+footer .fb { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; color: var(--terracotta); }
+footer .fm { font-size: 0.83rem; opacity: 0.55; }
