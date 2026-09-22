@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes & Inspiration — PocketPans</title>
+<meta name="description" content="Recipes and ideas for PocketCakes and PocketPies — fillable silicone bakeware for cupcakes, muffins, personal pizzas, and more.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XC9ZCYYC71"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XC9ZCYYC71');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,300;9..144,1,400;9..144,1,500;9..144,1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf5ee;
+  --cream-deep: #f0e8d5;
+  --terracotta: #c2553e;
+  --terracotta-deep: #8e3a28;
+  --ink: #1a1410;
+  --ink-soft: #4a3f36;
+  --warm-gray: #8a7a6c;
+  --line: #d9cdb8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(250,245,238,0.93);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1400px; margin: 0 auto;
+  padding: 1.1rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1.5rem;
+}
+.logo-img { height: 44px; width: auto; display: block; }
+@media (max-width: 767px) { .logo-img { height: 32px; } }
+.logo {
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 1.5rem;
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 0.95rem;
+}
+.nav-links a {
+  color: var(--ink); text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+.nav-cta {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+  font-size: 0.9rem; color: var(--terracotta); text-decoration: none;
+  border: 1px solid var(--terracotta); border-radius: 999px;
+  padding: 0.5rem 1.2rem; transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--terracotta); color: var(--cream); }
+@media (max-width: 767px) {
+  .nav-cta { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
+  .nav-links { gap: 1rem; font-size: 0.85rem; }
+}
+
+.eyebrow {
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracotta); margin-bottom: 1.3rem; display: block;
+}
+
+.product-hero {
+  padding: 5rem 5% 3.5rem; text-align: center;
+  background: var(--cream);
+}
+.product-hero h2 {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400; line-height: 1; letter-spacing: -0.025em;
+  margin: 0.7rem 0 1.3rem;
+}
+.product-hero .tagline {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  color: var(--ink-soft); max-width: 640px;
+  margin: 0 auto;
+}
+
+.recipes { background: var(--cream); padding: 2rem 5% 7rem; }
+.recipe-group { max-width: 1200px; margin: 0 auto 4rem; }
+.recipe-group:last-child { margin-bottom: 0; }
+.recipe-group-label {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-weight: 500; font-size: 1.3rem; color: var(--terracotta);
+  margin-bottom: 1.6rem; text-align: center;
+}
+.recipe-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+@media (max-width: 900px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .recipe-grid { grid-template-columns: 1fr; } }
+.recipe-card {
+  background: var(--cream-deep); overflow: hidden;
+  border-radius: 4px; border-top: 3px solid var(--terracotta);
+}
+.recipe-card-image { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
+.recipe-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.recipe-card-body { padding: 1.6rem 1.4rem; }
+.recipe-card h4 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 1.1rem; margin-bottom: 0.9rem; letter-spacing: -0.01em;
+}
+.recipe-card ol {
+  color: var(--ink-soft); font-size: 0.88rem; line-height: 1.55;
+  padding-left: 1.1rem;
+}
+.recipe-card li { margin-bottom: 0.4rem; }
+.recipe-card li:last-child { margin-bottom: 0; }
+
+footer { background: var(--ink); color: var(--cream); padding: 3rem 5%; text-align: center; }
+footer .fi { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
+footer .fb { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; color: var(--terracotta); }
+footer .fm { font-size: 0.83rem; opacity: 0.55; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <button class="logo" onclick="location.href='index.html'" aria-label="PocketPans home">
+      <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="logo-img">
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="recipes.html" class="active">Recipes</a>
+    </div>
+    <a class="nav-cta" href="https://www.amazon.com/dp/B0H28JRGD4" target="_blank" rel="noopener">Buy on Amazon</a>
+  </div>
+</header>
+
+<div class="product-hero">
+  <span class="eyebrow">PocketPans · Recipes & Inspiration</span>
+  <h2 class="serif">Fill it with anything.</h2>
+  <p class="tagline">Sweet or savory, standard or personal — a few ideas to get you started. Every recipe uses the same simple system: place, insert, bake.</p>
+</div>
+
+<div class="recipes">
+
+  <div class="recipe-group">
+    <div class="recipe-group-label">PocketCakes</div>
+    <div class="recipe-grid">
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Chocolate_Buttercream.jpg" alt="Classic filled chocolate cupcake with vanilla buttercream">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Classic Filled Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with chocolate cake batter.</li>
+            <li>Press insert down until batter reaches just below the rim.</li>
+            <li>Bake per your batter's standard time and temp.</li>
+            <li>Remove insert while warm. Fill pocket with vanilla buttercream.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Coffee_Cake.jpg" alt="Mini coffee cake with fruit filling">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Mini Coffee Cake with Fruit Filling</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with coffee cake batter, adding crumb topping around the insert rim.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with pie filling.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipes_Smores.jpg" alt="S'mores filled chocolate cupcake">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">S'mores Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with chocolate cake batter.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with mini marshmallows and a chocolate drizzle. Broil briefly to toast.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_PBnJ.jpg" alt="PB&J filled cupcake">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">PB&J Cupcake</h4>
+          <ol>
+            <li>Fill cavities 2/3 full with yellow cake batter.</li>
+            <li>Press insert in and bake as directed.</li>
+            <li>Remove while warm, fill with a peanut butter and jelly swirl.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipe-group">
+    <div class="recipe-group-label">PocketPies</div>
+    <div class="recipe-grid">
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Pepperoni_Pie.jpg" alt="Personal deep-dish pepperoni pizza">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Personal Deep-Dish Pizza</h4>
+          <ol>
+            <li>Press pizza dough into the cavity, about 3/4 up the sidewall.</li>
+            <li>Press insert in firmly to form the pocket.</li>
+            <li>Bake until the crust is set and golden.</li>
+            <li>Remove insert while warm, add sauce, cheese, and toppings.</li>
+            <li>Return to the oven and bake until cheese is melted and toppings are cooked through.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Chili_Cornbread.jpg" alt="Chili cornbread cups">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Chili Cornbread Cups</h4>
+          <ol>
+            <li>Fill cavities 3/4 full with cornbread batter.</li>
+            <li>Press insert in until batter nearly reaches the rim.</li>
+            <li>Bake per your cornbread recipe's time and temp.</li>
+            <li>Remove insert while warm, fill with chili.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_PotPie.jpg" alt="Mini chicken pot pie">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Mini Chicken Pot Pie</h4>
+          <ol>
+            <li>Press pie or biscuit dough into the cavity, up the sidewall.</li>
+            <li>Press insert in to form the pocket.</li>
+            <li>Pre-bake crust 5-7 minutes, then remove insert.</li>
+            <li>Fill with pre-cooked pot pie filling, top with a small dough round, and finish baking until golden.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-card-image">
+          <img src="images/Recipe_Bread_Bowl.jpg" alt="Personal bread bowl with soup">
+        </div>
+        <div class="recipe-card-body">
+          <h4 class="serif">Personal Bread Bowl</h4>
+          <ol>
+            <li>Press bread or pizza dough into the cavity, about 1/2" thick up the sidewall.</li>
+            <li>Press insert in firmly.</li>
+            <li>Bake until golden and set.</li>
+            <li>Remove insert while warm. Fill with soup just before serving.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="fi">
+    <div class="fb">PocketPans</div>
+    <div class="fm">A Paulegone brand · © 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
