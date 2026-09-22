@@ -17,6 +17,7 @@ body {
   background: var(--cream);
 }
 .serif { font-family: 'Fraunces', Georgia, serif; }
+img { max-width: 100%; }
 
 /* ─── HEADER / NAV ─── */
 header {
@@ -34,9 +35,9 @@ header {
 .logo {
   background: none; border: none; cursor: pointer; padding: 0;
   display: flex; align-items: baseline; gap: 0.15rem;
+  flex-shrink: 0;
 }
 .logo-img { height: 44px; width: auto; display: block; }
-@media (max-width: 767px) { .logo-img { height: 32px; } }
 
 .nav-links {
   display: flex; align-items: center; gap: 1.8rem;
@@ -62,22 +63,31 @@ header {
   padding: 0.5rem 1.2rem;
   transition: background 0.3s, color 0.3s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-cta:hover { background: var(--terracotta); color: var(--cream); }
 
 @media (max-width: 767px) {
   .nav {
-    flex-wrap: wrap;
-    gap: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo cta"
+      "links links";
+    row-gap: 0.6rem;
+    padding: 0.9rem 4%;
   }
+  .logo { grid-area: logo; }
+  .nav-cta { grid-area: cta; justify-self: end; font-size: 0.7rem; padding: 0.35rem 0.8rem; }
   .nav-links {
-    order: 3;
+    grid-area: links;
     width: 100%;
     justify-content: center;
-    gap: 1.2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
-  .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
-  .nav-cta { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
+  .nav-links a { font-size: 0.58rem; letter-spacing: 0.14em; }
+  .logo-img { height: 28px; }
 }
 
 /* ─── SHARED HELPERS ─── */
