@@ -288,6 +288,30 @@ body { overflow-x: hidden; }
   color: var(--ink-soft); max-width: 620px; margin: 0 auto;
 }
 
+/* ─── PRODUCT SHOTS ─── */
+.product-shots {
+  background: var(--cream);
+  padding: 0 5% 5rem;
+}
+.shots-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 768px) { .shots-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+.shot-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 8px 40px -8px rgba(0,0,0,0.12);
+}
+.shot-card img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 /* ─── VIDEO CARDS ─── */
 .video-cards {
   display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
@@ -602,7 +626,18 @@ body { overflow-x: hidden; }
     <h1 class="serif">One pan, two sizes, <em>four ways to bake.</em></h1>
     <p class="lead">A baking system designed around the moment everyone loves most — the surprise inside. Use the pan alone, the insert alone, both together for a fillable pocket, or bake two flavors in one. Cream-filled cupcakes. Deep-dish pizza with a pocket of sauce and cheese. Pot pies, hand pies, and everything in between.</p>
   </div>
-
+  
+<div class="product-shots">
+    <div class="shots-grid">
+      <div class="shot-card">
+        <img src="images/PocketCakes_Detail_WTBKG.jpg" alt="PocketCakes silicone cupcake pan and inserts">
+      </div>
+      <div class="shot-card">
+        <img src="images/PocketPies_Detail_WTBKG.jpg" alt="PocketPies silicone pizza pan and inserts">
+      </div>
+    </div>
+  </div>
+  
   <div class="video-cards">
     <div class="video-card">
       <div class="video-card-media">
