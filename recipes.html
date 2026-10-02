@@ -38,14 +38,35 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
 <link rel="stylesheet" href="styles.css">
 <style>
 :root { --white: #fff; --gray-bg: #f5f5f7; }
-/* Header (matches index.html) */
-.logo-img { height: 56px; }
+/* Header: nav left, big logo centered hanging off the bottom edge; shrinks to the text logo on scroll */
+:root { --logo-h: 168px; --hang: calc(var(--logo-h) / 2); --hdr: 96px; --hdr-s: 64px; }
+@media (max-width: 1000px) { :root { --logo-h: clamp(100px, 24vw, 150px); --hdr: calc(var(--hang) + 42px); } }
+html { scroll-padding-top: 80px; }
+body { padding-top: var(--hdr); }
+header { position: fixed; top: 0; left: 0; right: 0; }
+.nav { position: relative; min-height: var(--hdr); transition: min-height .35s ease; }
+header.scrolled .nav { min-height: var(--hdr-s); }
+.logo { position: absolute; inset: 0; pointer-events: none; z-index: 210; display: block; }
+.logo img { position: absolute; left: 50%; pointer-events: auto; width: auto; max-width: none; transition: opacity .3s ease, transform .35s ease; }
+.logo-full { bottom: 0; height: var(--logo-h); transform: translate(-50%, 50%); }
+.logo-text { top: 50%; height: 40px; opacity: 0; transform: translate(-50%, -50%) scale(.85); pointer-events: none !important; }
+header.scrolled .logo-full { opacity: 0; transform: translate(-50%, 50%) scale(.4); pointer-events: none; }
+header.scrolled .logo-text { opacity: 1; transform: translate(-50%, -50%); pointer-events: auto !important; }
 .nav-cta { background: var(--terracotta); color: #fff; font-style: normal; font-weight: 600; letter-spacing: .02em; }
 .nav-cta:hover { background: var(--terracotta-deep); color: #fff; }
-@media (max-width: 767px) { .logo-img { height: 40px; } }
+@media (max-width: 1000px) {
+  .nav { display: flex; justify-content: space-between; align-items: flex-start; padding: .8rem 4% 0; }
+  .nav-links { width: auto; flex-wrap: nowrap; gap: .8rem; justify-content: flex-start; }
+  .nav-cta { justify-self: auto; }
+  header.scrolled .nav { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "logo cta" "links links"; row-gap: .5rem; align-items: center; padding: .6rem 4% .6rem; min-height: 0; }
+  header.scrolled .nav-cta { grid-area: cta; }
+  header.scrolled .nav-links { grid-area: links; width: 100%; justify-content: center; }
+  .logo-text { height: 28px; }
+  header.scrolled .logo-text { left: 4%; top: .6rem; transform: none; }
+}
 body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-.recipes-hero { padding: clamp(3.5rem, 8vw, 6.5rem) 5% clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--white); }
+.recipes-hero { padding: calc(var(--hang) + 2.5rem) 5% clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--white); }
 .recipes-hero .display {
   font-family: 'Fraunces', Georgia, serif; font-weight: 500;
   letter-spacing: -0.035em; line-height: 1.02;
@@ -88,7 +109,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 
 <header>
   <div class="nav">
-    <a class="logo" href="index.html" aria-label="PocketPans home"><img src="images/PocketPans_Logo.png" alt="PocketPans" class="logo-img"></a>
+    <a class="logo" href="index.html" aria-label="PocketPans home"><img class="logo-full" src="images/PocketPans_Logo.png" alt="PocketPans"><img class="logo-text" src="images/PocketPans_Logo_Text.png" alt="" aria-hidden="true"></a>
     <div class="nav-links">
       <a href="index.html#how">4-in-1</a>
       <a href="index.html#shop">Shop</a>
@@ -243,5 +264,12 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   </div>
 </footer>
 
+<script>
+(function () {
+  var h = document.querySelector('header');
+  function f() { h.classList.toggle('scrolled', window.scrollY > 30); }
+  window.addEventListener('scroll', f, { passive: true }); f();
+})();
+</script>
 </body>
 </html>
