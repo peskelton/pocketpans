@@ -37,80 +37,76 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,300;9..144,1,400;9..144,1,500;9..144,1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-.product-hero {
-  padding: 5rem 5% 3.5rem; text-align: center;
-  background: var(--cream);
-}
-.product-hero h2 {
-  font-family: 'Fraunces', serif; font-style: italic;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 400; line-height: 1; letter-spacing: -0.025em;
-  margin: 0.7rem 0 1.3rem;
-}
-.product-hero .tagline {
-  font-family: 'Fraunces', serif; font-weight: 300;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  color: var(--ink-soft); max-width: 640px;
-  margin: 0 auto;
-}
+:root { --white: #fff; --gray-bg: #f5f5f7; }
+/* Header (matches index.html) */
+.logo-img { height: 56px; }
+.nav-cta { background: var(--terracotta); color: #fff; font-style: normal; font-weight: 600; letter-spacing: .02em; }
+.nav-cta:hover { background: var(--terracotta-deep); color: #fff; }
+@media (max-width: 767px) { .logo-img { height: 40px; } }
+body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-.recipes { background: var(--cream); padding: 2rem 5% 7rem; }
-.recipe-group { max-width: 1200px; margin: 0 auto 4rem; }
-.recipe-group:last-child { margin-bottom: 0; }
+.recipes-hero { padding: clamp(3.5rem, 8vw, 6.5rem) 5% clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--white); }
+.recipes-hero .display {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+  letter-spacing: -0.035em; line-height: 1.02;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+}
+.recipes-hero .display em { font-style: italic; color: var(--terracotta); }
+.recipes-hero .sub { font-size: clamp(1.05rem, 1.8vw, 1.4rem); color: var(--ink-soft); max-width: 680px; margin: 1.2rem auto 0; line-height: 1.5; }
+
+.recipes { padding: 0 0 clamp(4rem, 8vw, 7rem); }
+.recipe-group { padding: clamp(3rem, 6vw, 5rem) 5%; }
+.recipe-group:nth-child(odd) { background: var(--gray-bg); }
+.recipe-group-inner { max-width: 1300px; margin: 0 auto; }
 .recipe-group-label {
-  font-family: 'Fraunces', serif; font-style: italic;
-  font-weight: 500; font-size: 1.3rem; color: var(--terracotta);
-  margin-bottom: 1.6rem; text-align: center;
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: clamp(2rem, 4.5vw, 3.2rem); letter-spacing: -0.03em;
+  margin-bottom: 2.2rem; text-align: center;
 }
-.recipe-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-}
-@media (max-width: 900px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
+.recipe-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+@media (max-width: 1000px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .recipe-grid { grid-template-columns: 1fr; } }
-.recipe-card {
-  background: var(--cream-deep); overflow: hidden;
-  border-radius: 4px; border-top: 3px solid var(--terracotta);
-}
+.recipe-card { background: var(--white); border-radius: 24px; overflow: hidden; }
+.recipe-group:nth-child(even) .recipe-card { background: var(--gray-bg); }
 .recipe-card-image { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
 .recipe-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.recipe-card-body { padding: 1.6rem 1.4rem; }
-.recipe-card h4 {
-  font-family: 'Fraunces', serif; font-weight: 500;
-  font-size: 1.1rem; margin-bottom: 0.9rem; letter-spacing: -0.01em;
-}
-.recipe-card ol {
-  color: var(--ink-soft); font-size: 0.88rem; line-height: 1.55;
-  padding-left: 1.1rem;
-}
-.recipe-card li { margin-bottom: 0.4rem; }
+.recipe-card-body { padding: 1.6rem 1.5rem 1.9rem; }
+.recipe-card h4 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.25rem; margin-bottom: .9rem; letter-spacing: -0.02em; line-height: 1.2; }
+.recipe-card ol { color: var(--ink-soft); font-size: .92rem; line-height: 1.55; padding-left: 1.1rem; }
+.recipe-card li { margin-bottom: .4rem; }
 .recipe-card li:last-child { margin-bottom: 0; }
+
+.buy-band { background: var(--ink); color: var(--cream); text-align: center; padding: clamp(3.5rem, 7vw, 5.5rem) 5%; }
+.buy-band h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2rem, 4.5vw, 3.2rem); letter-spacing: -0.03em; }
+.buy-band h2 em { font-style: italic; color: #e8866f; }
+.buy-band p { color: rgba(250,245,238,.7); max-width: 560px; margin: 1rem auto 2rem; }
+.btn { display: inline-flex; padding: .95rem 2rem; border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--terracotta); color: #fff; transition: background .25s; }
+.btn:hover { background: var(--terracotta-deep); }
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <button class="logo" onclick="location.href='index.html'" aria-label="PocketPans home">
-      <img src="images/PocketPans_Logo_Text.png" alt="PocketPans" class="logo-img">
-    </button>
+    <a class="logo" href="index.html" aria-label="PocketPans home"><img src="images/PocketPans_Logo.png" alt="PocketPans" class="logo-img"></a>
     <div class="nav-links">
-      <a href="index.html#cupcake">PocketCakes</a>
-      <a href="index.html#pizza">PocketPies</a>
+      <a href="index.html#how">4-in-1</a>
+      <a href="index.html#shop">Shop</a>
       <a href="recipes.html" class="active">Recipes</a>
     </div>
     <a class="nav-cta" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
   </div>
 </header>
 
-<div class="product-hero">
-  <span class="eyebrow">PocketPans · Recipes & Inspiration</span>
-  <h2 class="serif">Fill it with anything.</h2>
-  <p class="tagline">Sweet or savory, standard or personal — a few ideas to get you started. Every recipe uses the same simple system: place, insert, bake.</p>
-</div>
+<section class="recipes-hero">
+  <span class="eyebrow">Recipes & inspiration</span>
+  <h1 class="display">Fill it with <em>anything.</em></h1>
+  <p class="sub">Sweet or savory, standard or personal — a few ideas to get you started. Every recipe uses the same simple system: place, insert, bake.</p>
+</section>
 
 <div class="recipes">
 
-  <div class="recipe-group">
+  <div class="recipe-group"><div class="recipe-group-inner">
     <div class="recipe-group-label">PocketCakes</div>
     <div class="recipe-grid">
       <div class="recipe-card">
@@ -167,9 +163,9 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 
-  <div class="recipe-group">
+  <div class="recipe-group"><div class="recipe-group-inner">
     <div class="recipe-group-label">PocketPies</div>
     <div class="recipe-grid">
       <div class="recipe-card">
@@ -230,9 +226,15 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 
 </div>
+
+<section class="buy-band">
+  <h2>Ready to <em>bake the pocket in?</em></h2>
+  <p>PocketCakes for cupcakes and muffins. PocketPies for pizzas and pot pies.</p>
+  <a class="btn" href="index.html#shop">Shop PocketPans</a>
+</section>
 
 <footer>
   <div class="fi">
