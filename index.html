@@ -228,6 +228,10 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .product .display { font-size: clamp(2.4rem, 5.5vw, 4.5rem); }
 .product-head { padding-left: 6%; padding-right: 6%; }
 .bleed { width: 100%; height: auto; display: block; }
+/* Pads the shorter PocketPies photo (1090x976) to the PocketCakes photo's height (1408x1408) so the rows below align side by side */
+.bleed-gap { height: 0; padding-bottom: calc((1 - 976 / 1090) * 100%); }
+.product-photo { aspect-ratio: 1 / 1; overflow: hidden; margin: 0 6% clamp(3rem, 6vw, 5rem); border-radius: 24px; background: var(--gray-bg); }
+.product-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .includes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 3.5rem 0 clamp(4rem, 8vw, 6rem); }
 .inc b { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.15rem; letter-spacing: -.01em; margin-bottom: .35rem; }
 .inc span { color: var(--ink-soft); font-size: .95rem; display: block; }
@@ -257,6 +261,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   .steps { grid-template-columns: 1fr; gap: 2rem; }
   .specs-grid { grid-template-columns: repeat(2, 1fr); }
   .products { grid-template-columns: 1fr; }
+  .bleed-gap { display: none; }
   .compare { height: 70vw; }
   .compare .knob { width: 46px; height: 46px; }
 }
@@ -380,6 +385,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <div class="inc"><b>Endless fillings</b><span>Cream, jam, cheesecake, egg bites, mousse.</span></div>
     </div>
   </div>
+  <div class="product-photo"><img src="images/PocketCakes_Dual_Flavor.jpeg" alt="PocketCakes with two flavors baked in one pan" loading="lazy"></div>
 </section>
 
 <!-- ═══ POCKETPIES ═══ -->
@@ -395,6 +401,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     </div>
   </div>
   <img class="bleed" src="images/PocketPies_Studio_Top.jpeg" alt="PocketPies silicone baking pans and inserts" loading="lazy">
+  <div class="bleed-gap" aria-hidden="true"></div>
   <div class="wrap">
     <div class="includes">
       <div class="inc"><b>3 silicone pans</b><span>Three larger cavities each. Nine per batch.</span></div>
@@ -403,6 +410,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <div class="inc"><b>Family-meal sized</b><span>Pizzas, pot pies, hand pies, calzones, quiche.</span></div>
     </div>
   </div>
+  <div class="product-photo"><img src="images/PocketPies_Pizza_Basil_Table.jpg" alt="PocketPies personal pizza with basil on a table" loading="lazy"></div>
 </section>
 
 </div><!-- /products -->
