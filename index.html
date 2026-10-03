@@ -203,8 +203,8 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .hero-intro::before, .hero-intro::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50%; z-index: -1; background-size: cover; background-position: center; opacity: var(--bg-op); }
 /* Each half runs a bit past center and fades out, so the two photos crossfade at the split */
 .hero-intro::before, .hero-intro::after { width: 62%; }
-.hero-intro::before { left: 0; background-image: url(images/PocketCakes_Dual_Flavor.jpeg); transform: scaleX(-1); /* mirrored so the cupcakes sit toward the left edge; the mask is mirrored with it */ -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
-.hero-intro::after { right: 0; background-image: url(images/PocketPies_Pizza_Basil_Table.jpg); -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
+.hero-intro::before { left: 0; background-image: url(images_web/PocketCakes_Dual_Flavor.webp); transform: scaleX(-1); /* mirrored so the cupcakes sit toward the left edge; the mask is mirrored with it */ -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
+.hero-intro::after { right: 0; background-image: url(images_web/PocketPies_Pizza_Basil_Table.webp); -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
 .hero-intro .eyebrow { margin-bottom: 1rem; }
 .hero-intro .display, .hero-intro .sub { text-shadow: 0 2px 4px rgba(60,28,29,.25), 0 6px 24px rgba(60,28,29,.35); }
 /* 1:1 viewer, whole image shown, full page width (may run past the screen height) */
@@ -309,7 +309,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 
 <header>
   <div class="nav">
-    <a class="logo" href="#top" aria-label="PocketPans home"><img class="logo-full" src="images/PocketPans_Logo.png" alt="PocketPans"><img class="logo-text" src="images/PocketPans_Logo_Text.png" alt="" aria-hidden="true"></a>
+    <a class="logo" href="#top" aria-label="PocketPans home"><img class="logo-full" src="images_web/PocketPans_Logo.webp" alt="PocketPans"><img class="logo-text" src="images_web/PocketPans_Logo_Text.webp" alt="" aria-hidden="true"></a>
     <div class="nav-links">
       <a href="#how">4-in-1</a>
       <a href="#shop">Products</a>
@@ -327,13 +327,10 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   <p class="sub">Fillable silicone bakeware. No coring. No cutting. Just a perfect pocket in every cupcake, pizza and pie.</p>
 </section>
 
-<!-- Photos come from images/Viewer/. After adding or removing files there, run: ./build_viewer.sh
-     (it regenerates viewer-images.js). If that list is empty, the fallback slides below are shown. -->
+<!-- Photos come from images_web/Viewer/. After adding or removing files, run ./optimize_images.sh then ./build_viewer.sh
+     (it regenerates viewer-images.js). The one static slide below is shown first and until the list loads; keep it the same as the first file in that list. -->
 <section class="viewer" id="viewer" aria-label="PocketPans product photos">
-  <figure class="slide on"><img src="images/hero-cupcake.png" alt="Filled cupcake cross-section"></figure>
-  <figure class="slide"><img src="images/hero-pizza.png" alt="Deep dish pizza cross-section"></figure>
-  <figure class="slide"><img src="images/PocketCakes_Top_Detail_WT.jpg" alt="PocketCakes silicone pans and inserts"></figure>
-  <figure class="slide"><img src="images/PocketPies_Top_Detail_WT.jpg" alt="PocketPies silicone pans and inserts"></figure>
+  <figure class="slide on"><img src="images_web/Viewer/PocketPans_Inserts_Top_Filled.webp" alt="PocketPans silicone pans and inserts" fetchpriority="high"></figure>
 </section>
 <script src="viewer-images.js"></script>
 
@@ -365,7 +362,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   <div class="wrap">
     <div class="four-grid">
       <article class="mode">
-        <div class="mode-img"><img src="images/PocketCakes_Oven_Cups.jpeg" alt="Pan and insert baked together, leaving a pocket" loading="lazy"></div>
+        <div class="mode-img"><img src="images_web/PocketCakes_Oven_Cups.webp" alt="Pan and insert baked together, leaving a pocket" loading="lazy"></div>
         <div class="mode-copy">
           <span class="mode-num">01</span>
           <h3>Pan + insert. The pocket.</h3>
@@ -373,7 +370,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
         </div>
       </article>
       <article class="mode">
-        <div class="mode-img"><img src="images/PocketCakes_Oven_Double_Baked.jpeg" alt="Two flavors baked in one pan" loading="lazy"></div>
+        <div class="mode-img"><img src="images_web/PocketCakes_Oven_Double_Baked.webp" alt="Two flavors baked in one pan" loading="lazy"></div>
         <div class="mode-copy">
           <span class="mode-num">02</span>
           <h3>Two flavors, one bake.</h3>
@@ -381,7 +378,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
         </div>
       </article>
       <article class="mode dark">
-        <div class="mode-img"><img src="images/PocketCakes_Oven_Inserts_Filled.jpeg" alt="Silicone inserts used on their own" loading="lazy"></div>
+        <div class="mode-img"><img src="images_web/PocketCakes_Oven_Inserts_Filled.webp" alt="Silicone inserts used on their own" loading="lazy"></div>
         <div class="mode-copy">
           <span class="mode-num">03</span>
           <h3>The insert, on its own.</h3>
@@ -389,7 +386,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
         </div>
       </article>
       <article class="mode dark">
-        <div class="mode-img"><img src="images/PocketCakes_Oven_Full.jpeg" alt="Silicone pan used on its own" loading="lazy"></div>
+        <div class="mode-img"><img src="images_web/PocketCakes_Oven_Full.webp" alt="Silicone pan used on its own" loading="lazy"></div>
         <div class="mode-copy">
           <span class="mode-num">04</span>
           <h3>The pan, on its own.</h3>
@@ -408,9 +405,9 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <h2 class="h2">Three steps to <em>the perfect pocket.</em></h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-img"><img src="images/PocketCakes_Batter.jpeg" alt="Batter in the silicone pan" loading="lazy"></div><div class="n">1</div><h3>Add batter or dough</h3><p>Fill each cavity with cupcake batter, pizza dough or pie crust.</p></div>
-      <div class="step"><div class="step-img"><img src="images/PocketCakes_Snap_Filled.jpeg" alt="Inserts snapped into the filled pan" loading="lazy"></div><div class="n">2</div><h3>Snap in the inserts</h3><p>Press the inserts in and snap them to the pans. The handles stay above the surface.</p></div>
-      <div class="step"><div class="step-img"><img src="images/PocketCakes_Insert_Pull_Cookie.jpeg" alt="Pulling an insert out to reveal the pocket" loading="lazy"></div><div class="n">3</div><h3>Bake, then lift</h3><p>Remove the inserts to reveal a fillable pocket in every bake. Fill with anything you imagine.</p></div>
+      <div class="step"><div class="step-img"><img src="images_web/PocketCakes_Batter.webp" alt="Batter in the silicone pan" loading="lazy"></div><div class="n">1</div><h3>Add batter or dough</h3><p>Fill each cavity with cupcake batter, pizza dough or pie crust.</p></div>
+      <div class="step"><div class="step-img"><img src="images_web/PocketCakes_Snap_Filled.webp" alt="Inserts snapped into the filled pan" loading="lazy"></div><div class="n">2</div><h3>Snap in the inserts</h3><p>Press the inserts in and snap them to the pans. The handles stay above the surface.</p></div>
+      <div class="step"><div class="step-img"><img src="images_web/PocketCakes_Insert_Pull_Cookie.webp" alt="Pulling an insert out to reveal the pocket" loading="lazy"></div><div class="n">3</div><h3>Bake, then lift</h3><p>Remove the inserts to reveal a fillable pocket in every bake. Fill with anything you imagine.</p></div>
     </div>
   </div>
 </section>
@@ -429,7 +426,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     </div>
   </div>
   <!-- Full-bleed studio shot: replace src with your new white-studio photo -->
-  <img class="bleed" src="images/PocketCakes_Studio_Top.jpg" alt="PocketCakes silicone baking pans and inserts" loading="lazy">
+  <img class="bleed" src="images_web/PocketCakes_Studio_Top.webp" alt="PocketCakes silicone baking pans and inserts" loading="lazy">
   <div class="wrap">
     <div class="includes">
       <div class="inc"><b>3 silicone pans</b><span>Four cavities each. Twelve per batch.</span></div>
@@ -438,7 +435,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <div class="inc"><b>Endless fillings</b><span>Cream, jam, cheesecake, egg bites, mousse.</span></div>
     </div>
   </div>
-  <div class="product-photo"><img src="images/PocketCakes_Dual_Flavor.jpeg" alt="PocketCakes with two flavors baked in one pan" loading="lazy"></div>
+  <div class="product-photo"><img src="images_web/PocketCakes_Dual_Flavor.webp" alt="PocketCakes with two flavors baked in one pan" loading="lazy"></div>
 </section>
 
 <!-- ═══ POCKETPIES ═══ -->
@@ -453,7 +450,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <a class="btn btn-primary amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
     </div>
   </div>
-  <img class="bleed" src="images/PocketPies_Studio_Top.jpeg" alt="PocketPies silicone baking pans and inserts" loading="lazy">
+  <img class="bleed" src="images_web/PocketPies_Studio_Top.webp" alt="PocketPies silicone baking pans and inserts" loading="lazy">
   <div class="pies-lower">
   <div class="bleed-gap" aria-hidden="true"></div>
   <div class="wrap">
@@ -464,7 +461,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <div class="inc"><b>Family-meal sized</b><span>Pizzas, pot pies, hand pies, calzones, quiche.</span></div>
     </div>
   </div>
-  <div class="product-photo"><img src="images/PocketPies_Pizza_Basil_Table.jpg" alt="PocketPies personal pizza with basil on a table" loading="lazy"></div>
+  <div class="product-photo"><img src="images_web/PocketPies_Pizza_Basil_Table.webp" alt="PocketPies personal pizza with basil on a table" loading="lazy"></div>
   </div>
 </section>
 
@@ -479,8 +476,8 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     <p class="sub">PocketCakes for cupcakes and muffins. PocketPies for pizzas and pot pies. Same fillable system.</p>
   </div>
   <div class="compare" id="compare">
-    <img src="images/hero-pizza.png" alt="Deep dish pizza cross-section" loading="lazy">
-    <img class="top" id="cmp-top" src="images/hero-cupcake.png" alt="Filled cupcake cross-section" loading="lazy">
+    <img src="images_web/hero-pizza.webp" alt="Deep dish pizza cross-section" loading="lazy">
+    <img class="top" id="cmp-top" src="images_web/hero-cupcake.webp" alt="Filled cupcake cross-section" loading="lazy">
     <div class="line" id="cmp-line"><div class="knob">‹›</div></div>
     <span class="tag l">PocketCakes</span><span class="tag r">PocketPies</span>
     <input type="range" min="0" max="100" value="50" id="cmp-range" aria-label="Compare PocketCakes and PocketPies">
@@ -521,11 +518,13 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   var viewer = document.getElementById('viewer');
   var list = window.VIEWER_IMAGES || [];
   if (list.length) {
-    viewer.innerHTML = '';
+    var first = viewer.querySelector('.slide img');
+    var keep = first && first.getAttribute('src') === list[0];
+    if (!keep) viewer.innerHTML = '';
     list.forEach(function (src, i) {
+      if (keep && i === 0) return;
       var f = document.createElement('figure'); f.className = 'slide';
       var im = new Image(); im.src = src; im.alt = 'PocketPans photo ' + (i + 1);
-      if (i > 1) im.loading = 'lazy';
       f.appendChild(im); viewer.appendChild(f);
     });
   }
