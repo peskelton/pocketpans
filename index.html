@@ -126,7 +126,7 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 <style>
 :root { --white: #fff; --gray-bg: #f5f5f7; }
 /* Header: nav left, big logo centered hanging off the bottom edge; shrinks to the text logo on scroll */
@@ -155,6 +155,9 @@ header.scrolled .logo-text { opacity: 1; transform: translate(-50%, -50%); point
   .logo-text { height: 28px; }
   header.scrolled .logo-text { left: 4%; top: .6rem; transform: none; }
 }
+/* Amazon-style buy buttons (colors only; no Amazon logo) */
+a[href*="amazon.com/dp"] { background: #FFD814; color: #0F1111; border: 1px solid #FCD200; border-radius: 10px; font-family: 'Inter', sans-serif; font-style: normal; font-weight: 500; letter-spacing: 0; box-shadow: 0 2px 5px rgba(15,17,17,.15); }
+a[href*="amazon.com/dp"]:hover { background: #F7CA00; color: #0F1111; border-color: #F2C200; transform: none; }
 body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
 .center { text-align: center; }
@@ -196,6 +199,21 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .viewer .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 /* ─── 4-IN-1 ─── */
+.cta-band { background: var(--ink); color: var(--cream); padding: clamp(4rem, 9vw, 7.5rem) 5%; text-align: center; }
+.cta-band .eyebrow { color: #e8866f; }
+.cta-band .h2 { color: var(--cream); max-width: 900px; margin: 0 auto; }
+.cta-band .h2 em { color: #e8866f; }
+.cta-band .sub { color: rgba(250,245,238,.75); }
+.cta-rating { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2rem; font-size: .95rem; color: rgba(250,245,238,.85); }
+.stars { --pct: 92%; font-size: 1.35rem; letter-spacing: .12em; line-height: 1; background: linear-gradient(90deg, #FFB400 var(--pct), rgba(250,245,238,.3) var(--pct)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.cta-points { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1100px; margin: 3rem auto 0; padding: 0; }
+.cta-points li { border-top: 1px solid rgba(250,245,238,.25); padding-top: 1.1rem; text-align: left; }
+.cta-points b { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.3rem; letter-spacing: -.01em; margin-bottom: .3rem; }
+.cta-points span { color: rgba(250,245,238,.7); font-size: .95rem; }
+.cta-buy { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.cta-buy .btn { font-size: 1.15rem; padding: 1.1rem 3rem; }
+.cta-price { color: rgba(250,245,238,.75); font-size: .95rem; }
+.cta-price b { color: var(--cream); font-family: 'Fraunces', serif; font-weight: 600; }
 .four { background: var(--gray-bg); padding: clamp(4rem, 9vw, 8rem) 0; }
 .four-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 3.5rem; }
 .mode { background: #fff; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; }
@@ -229,6 +247,8 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .product-head { padding-left: 6%; padding-right: 6%; }
 .bleed { width: 100%; height: auto; display: block; }
 /* Pads the shorter PocketPies photo (1090x976) to the PocketCakes photo's height (1408x1408) so the rows below align side by side */
+#pizza-section { display: flex; flex-direction: column; }
+.pies-lower { flex: 1; display: flow-root; background: #dee2e6; } /* matches the bottom edge of PocketPies_Studio_Top.jpeg */
 .bleed-gap { height: 0; padding-bottom: calc((1 - 976 / 1090) * 100%); }
 .product-photo { aspect-ratio: 1 / 1; overflow: hidden; margin: 0 6% clamp(3rem, 6vw, 5rem); border-radius: 24px; background: var(--gray-bg); }
 .product-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -259,7 +279,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 @media (max-width: 860px) {
   .four-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; gap: 2rem; }
-  .specs-grid { grid-template-columns: repeat(2, 1fr); }
+  .specs-grid, .cta-points { grid-template-columns: repeat(2, 1fr); }
   .products { grid-template-columns: 1fr; }
   .bleed-gap { display: none; }
   .compare { height: 70vw; }
@@ -277,7 +297,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     <a class="logo" href="#top" aria-label="PocketPans home"><img class="logo-full" src="images/PocketPans_Logo.png" alt="PocketPans"><img class="logo-text" src="images/PocketPans_Logo_Text.png" alt="" aria-hidden="true"></a>
     <div class="nav-links">
       <a href="#how">4-in-1</a>
-      <a href="#shop">Shop</a>
+      <a href="#shop">Products</a>
       <a href="recipes.html">Recipes</a>
     </div>
     <a class="nav-cta" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
@@ -301,6 +321,24 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
   <figure class="slide"><img src="images/PocketPies_Top_Detail_WT.jpg" alt="PocketPies silicone pans and inserts"></figure>
 </section>
 <script src="viewer-images.js"></script>
+
+<!-- ═══ CTA BAND ═══ -->
+<section class="cta-band">
+  <span class="eyebrow">4-in-1 fillable bakeware</span>
+  <h2 class="h2">Bake the pocket in. <em>Skip the coring.</em></h2>
+  <p class="sub">One pan and insert system for cupcakes, mini pizzas, pot pies and more. Fill it before you bake, or after.</p>
+  <div class="cta-rating"><span class="stars" role="img" aria-label="4.6 out of 5 stars">★★★★★</span><span><b>4.6/5</b> · 23 reviews on Amazon</span></div>
+  <ul class="cta-points">
+    <li><b>4 ways to bake</b><span>Pan, insert, pan + insert, or two flavors at once.</span></li>
+    <li><b>A pocket in every bake</b><span>Ready for cream, jam, sauce, cheese or filling.</span></li>
+    <li><b>Oven safe to 450°F</b><span>Food-grade, BPA-free, non-stick silicone.</span></li>
+    <li><b>Dishwasher safe</b><span>Easy to clean, easy to store.</span></li>
+  </ul>
+  <div class="cta-buy">
+    <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+    <span class="cta-price">PocketCakes <b>$19.88</b> &nbsp;·&nbsp; PocketPies <b>$21.88</b> &nbsp;Launch prices</span>
+  </div>
+</section>
 
 <!-- ═══ 4-IN-1 ═══ -->
 <section class="four" id="how">
@@ -401,6 +439,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     </div>
   </div>
   <img class="bleed" src="images/PocketPies_Studio_Top.jpeg" alt="PocketPies silicone baking pans and inserts" loading="lazy">
+  <div class="pies-lower">
   <div class="bleed-gap" aria-hidden="true"></div>
   <div class="wrap">
     <div class="includes">
@@ -411,6 +450,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     </div>
   </div>
   <div class="product-photo"><img src="images/PocketPies_Pizza_Basil_Table.jpg" alt="PocketPies personal pizza with basil on a table" loading="lazy"></div>
+  </div>
 </section>
 
 </div><!-- /products -->
