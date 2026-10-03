@@ -158,6 +158,14 @@ header.scrolled .logo-text { opacity: 1; transform: translate(-50%, -50%); point
 /* Amazon-style buy buttons (colors only; no Amazon logo) */
 a[href*="amazon.com/dp"] { background: #FFD814; color: #0F1111; border: 1px solid #FCD200; border-radius: 10px; font-family: 'Inter', sans-serif; font-style: normal; font-weight: 500; letter-spacing: 0; box-shadow: 0 2px 5px rgba(15,17,17,.15); }
 a[href*="amazon.com/dp"]:hover { background: #F7CA00; color: #0F1111; border-color: #F2C200; transform: none; }
+/* Buy button with rating: same button size, smaller text, two lines */
+a.amz { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: .12rem; line-height: 1.1; padding-top: 0; padding-bottom: 0; }
+a.amz .amz-t { font-size: .78em; font-weight: 600; }
+a.amz .amz-r { font-size: .66em; font-weight: 500; display: inline-flex; align-items: center; gap: .4em; }
+.amz-stars { letter-spacing: .06em; background: linear-gradient(90deg, #C45500 92%, rgba(15,17,17,.28) 92%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-cta.amz { height: 39px; min-width: 9.5rem; }
+.btn.amz { height: 59px; min-width: 12.2rem; }
+@media (max-width: 767px) { .nav-cta.amz { height: 30px; min-width: 7.2rem; } .nav-cta.amz .amz-t { font-size: .8em; } .nav-cta.amz .amz-r { font-size: .72em; } }
 body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
 .center { text-align: center; }
@@ -190,8 +198,15 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .cta-row { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2rem; }
 
 /* ─── HERO ─── */
-.hero-intro { padding: calc(var(--hang) + 2.5rem) 5% 2.5rem; text-align: center; background: var(--white); }
+.hero-intro { --bg-op: .5; position: relative; isolation: isolate; padding: calc(var(--hang) + 2.5rem) 5% 2.5rem; text-align: center; background: var(--white); }
+/* Split background: PocketCakes left | PocketPies right (opacity set by --bg-op) */
+.hero-intro::before, .hero-intro::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50%; z-index: -1; background-size: cover; background-position: center; opacity: var(--bg-op); }
+/* Each half runs a bit past center and fades out, so the two photos crossfade at the split */
+.hero-intro::before, .hero-intro::after { width: 62%; }
+.hero-intro::before { left: 0; background-image: url(images/PocketCakes_Dual_Flavor.jpeg); transform: scaleX(-1); /* mirrored so the cupcakes sit toward the left edge; the mask is mirrored with it */ -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
+.hero-intro::after { right: 0; background-image: url(images/PocketPies_Pizza_Basil_Table.jpg); -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
 .hero-intro .eyebrow { margin-bottom: 1rem; }
+.hero-intro .display, .hero-intro .sub { text-shadow: 0 2px 4px rgba(60,28,29,.25), 0 6px 24px rgba(60,28,29,.35); }
 /* 1:1 viewer, whole image shown, full page width (may run past the screen height) */
 .viewer { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #fff; overflow: hidden; }
 .viewer .slide { position: absolute; inset: 0; opacity: 0; }
@@ -300,7 +315,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <a href="#shop">Products</a>
       <a href="recipes.html">Recipes</a>
     </div>
-    <a class="nav-cta" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+    <a class="nav-cta amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
   </div>
 </header>
 
@@ -410,7 +425,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     <p class="sub">A pocket inside every cupcake. Cream, custard, jam, ganache — fill it however you imagine.</p>
     <p class="price"><b>$19.88</b> &nbsp;Launch price</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+      <a class="btn btn-primary amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
     </div>
   </div>
   <!-- Full-bleed studio shot: replace src with your new white-studio photo -->
@@ -435,7 +450,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     <p class="sub">A deep pocket molded into every bake. Personal pizzas, pot pies, hand pies and savory creations.</p>
     <p class="price"><b>$21.88</b> &nbsp;Launch price</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+      <a class="btn btn-primary amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
     </div>
   </div>
   <img class="bleed" src="images/PocketPies_Studio_Top.jpeg" alt="PocketPies silicone baking pans and inserts" loading="lazy">

@@ -67,6 +67,41 @@ header.scrolled .logo-text { opacity: 1; transform: translate(-50%, -50%); point
 /* Amazon-style buy buttons (colors only; no Amazon logo) */
 a[href*="amazon.com/dp"] { background: #FFD814; color: #0F1111; border: 1px solid #FCD200; border-radius: 10px; font-family: 'Inter', sans-serif; font-style: normal; font-weight: 500; letter-spacing: 0; box-shadow: 0 2px 5px rgba(15,17,17,.15); }
 a[href*="amazon.com/dp"]:hover { background: #F7CA00; color: #0F1111; border-color: #F2C200; transform: none; }
+/* Buy button with rating: same button size, smaller text, two lines */
+a.amz { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: .12rem; line-height: 1.1; padding-top: 0; padding-bottom: 0; }
+a.amz .amz-t { font-size: .78em; font-weight: 600; }
+a.amz .amz-r { font-size: .66em; font-weight: 500; display: inline-flex; align-items: center; gap: .4em; }
+.amz-stars { letter-spacing: .06em; background: linear-gradient(90deg, #C45500 92%, rgba(15,17,17,.28) 92%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-cta.amz { height: 39px; min-width: 9.5rem; }
+.btn.amz { height: 59px; min-width: 12.2rem; }
+@media (max-width: 767px) { .nav-cta.amz { height: 30px; min-width: 7.2rem; } .nav-cta.amz .amz-t { font-size: .8em; } .nav-cta.amz .amz-r { font-size: .72em; } }
+/* CTA band (same as home page) */
+.h2 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+  letter-spacing: -0.03em; line-height: 1.05;
+  font-size: clamp(2.1rem, 5vw, 4rem);
+}
+.h2 em, .display em { font-style: italic; color: var(--terracotta); font-weight: 500; }
+.sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.4rem); color: var(--ink-soft);
+  max-width: 680px; margin: 1.2rem auto 0; line-height: 1.5;
+}
+.cta-band { background: var(--ink); color: var(--cream); padding: clamp(4rem, 9vw, 7.5rem) 5%; text-align: center; }
+.cta-band .eyebrow { color: #e8866f; }
+.cta-band .h2 { color: var(--cream); max-width: 900px; margin: 0 auto; }
+.cta-band .h2 em { color: #e8866f; }
+.cta-band .sub { color: rgba(250,245,238,.75); }
+.cta-rating { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2rem; font-size: .95rem; color: rgba(250,245,238,.85); }
+.stars { --pct: 92%; font-size: 1.35rem; letter-spacing: .12em; line-height: 1; background: linear-gradient(90deg, #FFB400 var(--pct), rgba(250,245,238,.3) var(--pct)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.cta-points { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1100px; margin: 3rem auto 0; padding: 0; }
+.cta-points li { border-top: 1px solid rgba(250,245,238,.25); padding-top: 1.1rem; text-align: left; }
+.cta-points b { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.3rem; letter-spacing: -.01em; margin-bottom: .3rem; }
+.cta-points span { color: rgba(250,245,238,.7); font-size: .95rem; }
+.cta-buy { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.cta-buy .btn { font-size: 1.15rem; padding: 1.1rem 3rem; }
+.cta-price { color: rgba(250,245,238,.75); font-size: .95rem; }
+.cta-price b { color: var(--cream); font-family: 'Fraunces', serif; font-weight: 600; }
+@media (max-width: 860px) { .cta-points { grid-template-columns: repeat(2, 1fr); } }
 body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 .recipes-hero { padding: calc(var(--hang) + 2.5rem) 5% clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--white); }
@@ -118,7 +153,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <a href="index.html#shop">Products</a>
       <a href="recipes.html" class="active">Recipes</a>
     </div>
-    <a class="nav-cta" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+    <a class="nav-cta amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
   </div>
 </header>
 
@@ -254,10 +289,22 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 
 </div>
 
-<section class="buy-band">
-  <h2>Ready to <em>bake the pocket in?</em></h2>
-  <p>PocketCakes for cupcakes and muffins. PocketPies for pizzas and pot pies.</p>
-  <a class="btn" href="index.html#shop">See the Products</a>
+<!-- ═══ CTA BAND ═══ -->
+<section class="cta-band">
+  <span class="eyebrow">4-in-1 fillable bakeware</span>
+  <h2 class="h2">Bake the pocket in. <em>Skip the coring.</em></h2>
+  <p class="sub">One pan and insert system for cupcakes, mini pizzas, pot pies and more. Fill it before you bake, or after.</p>
+  <div class="cta-rating"><span class="stars" role="img" aria-label="4.6 out of 5 stars">★★★★★</span><span><b>4.6/5</b> · 23 reviews on Amazon</span></div>
+  <ul class="cta-points">
+    <li><b>4 ways to bake</b><span>Pan, insert, pan + insert, or two flavors at once.</span></li>
+    <li><b>A pocket in every bake</b><span>Ready for cream, jam, sauce, cheese or filling.</span></li>
+    <li><b>Oven safe to 450°F</b><span>Food-grade, BPA-free, non-stick silicone.</span></li>
+    <li><b>Dishwasher safe</b><span>Easy to clean, easy to store.</span></li>
+  </ul>
+  <div class="cta-buy">
+    <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
+    <span class="cta-price">PocketCakes <b>$19.88</b> &nbsp;·&nbsp; PocketPies <b>$21.88</b> &nbsp;Launch prices</span>
+  </div>
 </section>
 
 <footer>
