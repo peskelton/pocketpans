@@ -32,10 +32,10 @@ src="https://www.facebook.com/tr?id=1710565360593624&ev=PageView&noscript=1"
   gtag('js', new Date());
   gtag('config', 'G-696TPMB8MQ');
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,300;9..144,1,400;9..144,1,500;9..144,1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="preload" href="fonts/Fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Fraunces-Italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=3">
 <style>
 :root { --white: #fff; --gray-bg: #f5f5f7; }
 /* Header: nav left, big logo centered hanging off the bottom edge; shrinks to the text logo on scroll */
@@ -64,6 +64,9 @@ header.scrolled .logo-text { opacity: 1; transform: translate(-50%, -50%); point
   .logo-text { height: 28px; }
   header.scrolled .logo-text { left: 4%; top: .6rem; transform: none; }
 }
+/* Amazon-style buy buttons (colors only; no Amazon logo) */
+a[href*="amazon.com/dp"] { background: #FFD814; color: #0F1111; border: 1px solid #FCD200; border-radius: 10px; font-family: 'Inter', sans-serif; font-style: normal; font-weight: 500; letter-spacing: 0; box-shadow: 0 2px 5px rgba(15,17,17,.15); }
+a[href*="amazon.com/dp"]:hover { background: #F7CA00; color: #0F1111; border-color: #F2C200; transform: none; }
 body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 .recipes-hero { padding: calc(var(--hang) + 2.5rem) 5% clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--white); }
@@ -112,7 +115,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
     <a class="logo" href="index.html" aria-label="PocketPans home"><img class="logo-full" src="images/PocketPans_Logo.png" alt="PocketPans"><img class="logo-text" src="images/PocketPans_Logo_Text.png" alt="" aria-hidden="true"></a>
     <div class="nav-links">
       <a href="index.html#how">4-in-1</a>
-      <a href="index.html#shop">Shop</a>
+      <a href="index.html#shop">Products</a>
       <a href="recipes.html" class="active">Recipes</a>
     </div>
     <a class="nav-cta" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Buy on Amazon</a>
@@ -254,7 +257,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 <section class="buy-band">
   <h2>Ready to <em>bake the pocket in?</em></h2>
   <p>PocketCakes for cupcakes and muffins. PocketPies for pizzas and pot pies.</p>
-  <a class="btn" href="index.html#shop">Shop PocketPans</a>
+  <a class="btn" href="index.html#shop">See the Products</a>
 </section>
 
 <footer>
