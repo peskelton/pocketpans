@@ -213,6 +213,11 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .viewer-wrap { position: relative; }
 .viewer-buy { position: absolute; left: 50%; bottom: clamp(1.25rem, 4vw, 2.75rem); transform: translateX(-50%); z-index: 5; font-size: 1.1rem; padding: 1rem 2.6rem; white-space: nowrap; box-shadow: 0 6px 24px rgba(60,28,29,.3); }
 a.viewer-buy:hover { transform: translateX(-50%); }
+/* Phones: the button sits below the photos instead of covering them */
+@media (max-width: 767px) {
+  .viewer-wrap { text-align: center; padding-bottom: 1rem; }
+  a.viewer-buy, a.viewer-buy:hover { position: static; transform: none; display: inline-flex; margin-top: 1rem; box-shadow: none; }
+}
 .viewer { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #fff; overflow: hidden; }
 .viewer .slide { position: absolute; inset: 0; opacity: 0; }
 .viewer .slide.on { opacity: 1; }
