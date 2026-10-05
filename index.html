@@ -205,11 +205,11 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .reviews::before { left: 0; background-image: url(images_web/PocketCakes_Dual_Flavor.webp); transform: scaleX(-1); /* mirrored so the cupcakes sit toward the left edge; the mask is mirrored with it */ -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
 .reviews::after { right: 0; background-image: url(images_web/PocketPies_Pizza_Basil_Table.webp); -webkit-mask-image: linear-gradient(270deg, #000 60%, transparent); mask-image: linear-gradient(270deg, #000 60%, transparent); }
 /* Thin text section between the photo band and the viewer */
-.intro-text { background: var(--white); text-align: center; padding: calc(var(--hang) + clamp(1.5rem, 3vw, 2.5rem)) 5% clamp(1.75rem, 3.5vw, 3rem); }
+.intro-text { background: #f7f6f8; /* top edge color of the viewer photos */ text-align: center; padding: calc(var(--hang) + clamp(1.5rem, 3vw, 2.5rem)) 5% clamp(1.75rem, 3.5vw, 3rem); }
 .intro-text .sub { margin-top: .5rem; font-size: clamp(.95rem, 1.5vw, 1.2rem); }
 /* 1:1 viewer, whole image shown, full page width (may run past the screen height) */
 .viewer-wrap { position: relative; }
-.viewer { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #fff; overflow: hidden; }
+.viewer { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #f7f6f8; overflow: hidden; }
 .viewer .slide { position: absolute; inset: 0; opacity: 0; }
 .viewer .slide.on { opacity: 1; }
 .viewer .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
