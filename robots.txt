@@ -1,4 +1,49 @@
+# PocketPans robots.txt
+# Regular search engines and AI search/answer crawlers are welcome.
+# Crawlers that collect content to train AI models are blocked.
+
 User-agent: *
 Allow: /
+
+# ---- AI model-training crawlers: blocked ----
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+# ---- Allowed (covered by the default rule above): Googlebot, Bingbot,
+# OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User,
+# Claude-SearchBot, Claude-User, DuckAssistBot, facebookexternalhit (ad/link previews)
 
 Sitemap: https://pocketpans.com/sitemap.xml

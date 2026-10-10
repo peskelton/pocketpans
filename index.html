@@ -7,6 +7,7 @@
 <meta name="description" content="Bake the pocket in — no coring. PocketCakes and PocketPies: pan alone, pan + insert, inserts alone, or two flavors in one bake. BPA-free silicone to 450°F. Shop on Amazon via pocketpans.com.">
 <link rel="icon" type="image/png" href="images/PP_favicon.png">
 <link rel="apple-touch-icon" href="images/PP_favicon.png">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://pocketpans.com/">
 <meta property="og:title" content="PocketPans — 4-in-1 Fillable Bakeware">
 <meta property="og:description" content="Bake the pocket in. Cupcakes, minis, personal pizzas & pot pies.">
@@ -305,6 +306,18 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 .specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
 .specs-grid b { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; letter-spacing: -.01em; }
 .specs-grid span { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--warm-gray); }
+.care { background: #fff; padding: clamp(4rem, 9vw, 7rem) 5%; }
+.care-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.care-photo { border-radius: 28px; overflow: hidden; background: var(--gray-bg); aspect-ratio: 3 / 4; }
+.care-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.care-copy .h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.care-copy .sub { margin: 1rem 0 0; max-width: none; font-size: clamp(1rem, 1.5vw, 1.2rem); }
+.care-list { margin-top: 1.8rem; border-top: 1px solid var(--line); }
+.care-list > div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.care-list dt { font-size: .75rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--terracotta); padding-top: .25rem; }
+.care-list dd { color: var(--ink-soft); }
+.care-copy .btn-link { margin-top: 1.2rem; padding-left: 0; }
+@media (max-width: 860px) { .care-inner { grid-template-columns: 1fr; } .care-photo { aspect-ratio: 4 / 3; max-height: 420px; } .care-list > div { grid-template-columns: 1fr; gap: .2rem; } }
 .recipes-cta { background: var(--gray-bg); padding: clamp(4rem, 8vw, 6rem) 5%; text-align: center; }
 
 @media (max-width: 860px) {
@@ -330,6 +343,7 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
       <a href="#how">4-in-1</a>
       <a href="#shop">Products</a>
       <a href="recipes.html">Recipes</a>
+      <a href="faq.html">FAQ</a>
     </div>
     <a class="nav-cta amz" href="https://www.amazon.com/dp/B0GPR6FM7M?maas=maas_adg_4F377C063B34EE9C27E82B6C053E6EB6_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener" aria-label="Buy on Amazon, rated 4.6 out of 5 stars from 23 reviews"><span class="amz-t">Buy on Amazon</span><span class="amz-r"><span class="amz-stars" aria-hidden="true">★★★★★</span>4.6/5</span></a>
   </div>
@@ -512,19 +526,27 @@ body { background: var(--white); overflow-x: hidden; -webkit-font-smoothing: ant
 </section>
 -->
 
-<section class="specs">
-  <div class="wrap specs-grid">
-    <div><b>Food-grade silicone</b><span>Material</span></div>
-    <div><b>Up to 450°F</b><span>Heat rating</span></div>
-    <div><b>Dishwasher safe</b><span>Care</span></div>
-    <div><b>BPA-free</b><span>Certified</span></div>
+<section class="care" id="care">
+  <div class="care-inner">
+    <div class="care-photo"><img src="images_web/PocketCakes_Stacked.webp" alt="PocketCakes pans nested into one stack, with the pink, blue and green inserts stacked beside them" loading="lazy"></div>
+    <div class="care-copy">
+      <h2 class="h2">Stores in the space of <em>one pan.</em></h2>
+      <p class="sub">The pans nest into each other, and the inserts stack on their own, so a whole set takes up about the footprint of a single pan.</p>
+      <dl class="care-list">
+        <div><dt>Material</dt><dd>Food-grade, BPA-free, non-stick silicone</dd></div>
+        <div><dt>Heat rating</dt><dd>Safe up to 450°F. Oven and freezer safe.</dd></div>
+        <div><dt>Washing</dt><dd>Dishwasher safe</dd></div>
+        <div><dt>Storage</dt><dd>Pans nest into one. The 12 PocketCakes inserts or 9 PocketPies inserts stack in the footprint of one. Nest to store only, since the pans can't be stacked while baking.</dd></div>
+      </dl>
+      <a class="btn btn-link" href="faq.html#care">More care questions</a>
+    </div>
   </div>
 </section>
 
 <section class="recipes-cta">
   <h2 class="h2">Recipes & <em>inspiration.</em></h2>
   <p class="sub">A growing collection of ideas for PocketCakes and PocketPies — sweet, savory, and everything in between.</p>
-  <div class="cta-row"><a class="btn btn-primary" href="recipes.html">See all recipes</a></div>
+  <div class="cta-row"><a class="btn btn-primary" href="recipes.html">See all recipes</a><a class="btn btn-link" href="faq.html">Read the FAQ</a></div>
 </section>
 
 </main>
